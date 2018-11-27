@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "vincentBaylly.github.io": {
+    "presentation": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
