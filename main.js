@@ -251,7 +251,7 @@ var FooterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar class=\"main-toolbar\">\n  <span>Vincent Baylly - Presentation</span>\n  <button mat-icon-button [matMenuTriggerFor]=\"menu\" class=\"main-menu\">\n    <mat-icon>more_vert</mat-icon>\n  </button>\n  <mat-menu #menu=\"matMenu\">\n    <button mat-menu-item>\n      <mat-icon>dialpad</mat-icon>\n      <span>Redial</span>\n    </button>\n    <button mat-menu-item disabled>\n      <mat-icon>voicemail</mat-icon>\n      <span>Check voicemail</span>\n    </button>\n    <button mat-menu-item>\n      <mat-icon>notifications_off</mat-icon>\n      <span>Disable alerts</span>\n    </button>\n  </mat-menu>\n</mat-toolbar>\n"
+module.exports = "<mat-toolbar class=\"main-toolbar\">\r\n  <span>Vincent Baylly - Presentation</span>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"menu\" class=\"main-menu\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #menu=\"matMenu\">\r\n    <button mat-menu-item>\r\n      <mat-icon>dialpad</mat-icon>\r\n      <span>Redial</span>\r\n    </button>\r\n    <button mat-menu-item disabled>\r\n      <mat-icon>voicemail</mat-icon>\r\n      <span>Check voicemail</span>\r\n    </button>\r\n    <button mat-menu-item>\r\n      <mat-icon>notifications_off</mat-icon>\r\n      <span>Disable alerts</span>\r\n    </button>\r\n  </mat-menu>\r\n</mat-toolbar>\r\n"
 
 /***/ }),
 
@@ -368,7 +368,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Dev\Perso\vincentBaylly.github.io\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Dev\Perso\presentationWebSite\src\main.ts */"./src/main.ts");
 
 
 /***/ })
