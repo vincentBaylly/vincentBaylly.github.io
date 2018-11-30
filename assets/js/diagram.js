@@ -90,3 +90,85 @@ var devops_config = {
                   ]
     }
 };
+
+var database_config = {
+    chart: {
+        container: '#databaseDiagram',
+
+        nodeAlign: 'BOTTOM',
+
+        connectors: {
+            type: 'step'
+        },
+        node: {
+            HTMLclass: 'node1'
+        }
+    },
+    nodeStructure: {
+      text: {
+              name: 'DataBase'
+          },
+          HTMLclass: 'blue',
+          stackChildren:true,
+          children: [
+                      {
+                          text:{
+                              name: 'MySQL'
+
+                          },
+                          HTMLclass: 'blue',
+                          link: {
+                              href: 'http://www.google.com'
+                          }
+                      },
+                      {
+                          text:{
+                              name: 'PostgreSQL'
+                          },
+                          HTMLclass: 'blue'
+                      },
+                      {
+                          text:{
+                              name: 'Oracle'
+                          },
+                          HTMLclass: 'blue'
+                      },
+                      {
+                          text:{
+                              name: 'SQL Server'
+                          },
+                          HTMLclass: 'blue'
+                      },
+                      {
+                          text:{
+                              name: 'Sybase'
+                          },
+                          HTMLclass: 'blue'
+                      },
+                      {
+                          text:{
+                              name: 'Derby'
+                          },
+                          HTMLclass: 'blue'
+                      },
+                      {
+                          text:{
+                              name: 'MongoDB'
+                          },
+                          HTMLclass: 'blue'
+                      },
+                      {
+                          text:{
+                              name: 'CouchBase'
+                          },
+                          HTMLclass: 'blue'
+                      },
+                      {
+                          text:{
+                              name: 'NoSQL'
+                          },
+                          HTMLclass: 'blue'
+                      }
+                  ]
+    }
+};
