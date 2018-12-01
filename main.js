@@ -194,7 +194,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <div class=\"diagram\" id=\"archiDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"devOpsDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"devDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"databaseDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"sysAppDiagram\"> --@-- </div>\n</div>\n"
+module.exports = "<div>\n  <div class=\"diagram\" id=\"archiDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"devOpsDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"databaseDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"devDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"sysAppDiagram\"> --@-- </div>\n</div>\n"
 
 /***/ }),
 
@@ -2958,113 +2958,148 @@ var sys_apps_config={
   },
   nodeStructure: {
     text:{
-      name:'System/Apps',
-      HTMLclass:'blue',
-      children:[
-        {
-          text:{
-            name:'Systems'
-          },
-          HTMLclass:'blue',
-          children:[
-            {
-              text:{
-                name:'Windows'
-              },
-              HTMLclass:'blue'
-            },
-            {
-              text:{
-                name:'UNIX/AIX'
-              },
-              HTMLclass:'blue'
-            },
-            {
-              text:{
-                name:'Linux'
-              },
-              HTMLclass:'blue',
-              stackChildren:true,
-              children:[
-                {
-                  text:{
-                    name:'Debian'
-                  },
-                  HTMLclass:'blue'
-                },
-                {
-                  text:{
-                    name:'Ubuntu'
-                  },
-                  HTMLclass:'blue'
-                },
-                {
-                  text:{
-                    name:'Mint'
-                  },
-                  HTMLclass:'blue'
-                },
-                {
-                  text:{
-                    name:'Centos'
-                  },
-                  HTMLclass:'blue'
-                },
-              ]
-            }
-          ]
+      name:'System/Apps'
+    },
+    HTMLclass:'blue',
+    children:[
+      {
+        text:{
+          name:'Systems'
         },
-        {
-          text:{
-            name:'App server'
+        HTMLclass:'blue',
+        children:[
+          {
+            text:{
+              name:'Windows'
+            },
+            HTMLclass:'blue'
           },
-          HTMLclass:'blue',
-          stackChildren:true,
-          children:[
-
-          ]
+          {
+            text:{
+              name:'UNIX/AIX'
+            },
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'Linux'
+            },
+            HTMLclass:'blue',
+            stackChildren:true,
+            children:[
+              {
+                text:{
+                  name:'Debian'
+                },
+                HTMLclass:'blue'
+              },
+              {
+                text:{
+                  name:'Ubuntu'
+                },
+                HTMLclass:'blue'
+              },
+              {
+                text:{
+                  name:'Mint'
+                },
+                HTMLclass:'blue'
+              },
+              {
+                text:{
+                  name:'Centos'
+                },
+                HTMLclass:'blue'
+              },
+            ]
+          }
+        ]
+      },
+      {
+        text:{
+          name:'App server'
         },
-        {
-          text:{
-            name:'Tools'
+        HTMLclass:'blue',
+        stackChildren:true,
+        children:[
+          {
+            text:{
+              name:'Apache'
+            },
+            HTMLclass:'blue'
           },
-          HTMLclass:'blue',
-          stackChildren:true,
-          children:[
-            {
-              text:{
-                name:'Eclipse/IntelliJ'
-              },
-              HTMLclass:'blue'
+          {
+            text:{
+              name:'Tomcat/TomEE'
             },
-            {
-              text:{
-                name:'Git/CVS/ClearCase'
-              },
-              HTMLclass:'blue'
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'WebLogic'
             },
-            {
-              text:{
-                name:'TOAD/SQL Developer'
-              },
-              HTMLclass:'blue'
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'JBoss'
             },
-            {
-              text:{
-                name:'Microsoft Office Suites'
-              },
-              HTMLclass:'blue'
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'Nginx'
             },
-            {
-              text:{
-                name:'Jira'
-              },
-              HTMLclass:'blue'
-            }
-          ]
-        }
-      ]
-    }
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'NodeJS'
+            },
+            HTMLclass:'blue'
+          }
+        ]
+      },
+      {
+        text:{
+          name:'Tools'
+        },
+        HTMLclass:'blue',
+        stackChildren:true,
+        children:[
+          {
+            text:{
+              name:'Eclipse/IntelliJ'
+            },
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'Git/CVS/ClearCase'
+            },
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'TOAD/SQL Developer'
+            },
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'Microsoft Office Suites'
+            },
+            HTMLclass:'blue'
+          },
+          {
+            text:{
+              name:'Jira'
+            },
+            HTMLclass:'blue'
+          }
+        ]
+      }
+    ]
   }
 }
 
