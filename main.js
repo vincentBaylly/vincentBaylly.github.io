@@ -107,7 +107,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.title = 'presentation';
     }
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -140,14 +139,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/header/header.component */ "./src/app/components/header/header.component.ts");
 /* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/footer/footer.component */ "./src/app/components/footer/footer.component.ts");
 /* harmony import */ var _components_diagram_diagram_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/diagram/diagram.component */ "./src/app/components/diagram/diagram.component.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _components_carousel_carousel_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/carousel/carousel.component */ "./src/app/components/carousel/carousel.component.ts");
+/* harmony import */ var _directives_carousel_item_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./directives/carousel-item.directive */ "./src/app/directives/carousel-item.directive.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -166,21 +169,161 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
                 _components_header_header_component__WEBPACK_IMPORTED_MODULE_4__["HeaderComponent"],
                 _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__["FooterComponent"],
-                _components_diagram_diagram_component__WEBPACK_IMPORTED_MODULE_6__["DiagramComponent"]
+                _components_diagram_diagram_component__WEBPACK_IMPORTED_MODULE_6__["DiagramComponent"],
+                _components_carousel_carousel_component__WEBPACK_IMPORTED_MODULE_7__["CarouselComponent"],
+                _components_carousel_carousel_component__WEBPACK_IMPORTED_MODULE_7__["CarouselItemElement"],
+                _directives_carousel_item_directive__WEBPACK_IMPORTED_MODULE_8__["CarouselItemDirective"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__["BrowserAnimationsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatToolbarModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatIconModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatMenuModule"]
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__["BrowserAnimationsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatToolbarModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatMenuModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatButtonModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/carousel/carousel.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/components/carousel/carousel.component.html ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"showControls\" class=\"slide-button\">\n  <button mat-raised-button (click)=\"prev()\" class=\"btn btn-default\">Prev</button>\n  <button mat-raised-button (click)=\"next()\" class=\"btn btn-default\">Next</button>\n</div>\n<section class=\"carousel-wrapper\" [ngStyle]=\"carouselWrapperStyle\">\n  <ul class=\"carousel-inner\" #carousel>\n    <li *ngFor=\"let item of items;\" class=\"carousel-item\">\n      <ng-container [ngTemplateOutlet]=\"item.tpl\"></ng-container>\n    </li>\n  </ul>\n</section>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/carousel/carousel.component.less":
+/*!*************************************************************!*\
+  !*** ./src/app/components/carousel/carousel.component.less ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.carousel-wrapper {\n  overflow: hidden;\n}\n.carousel-inner {\n  display: flex;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3dhbGxhY2UvV29ya3NwYWNlL3ByZXNlbnRhdGlvbldlYlNpdGUvc3JjL2FwcC9jb21wb25lbnRzL2Nhcm91c2VsL2Nhcm91c2VsLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9jb21wb25lbnRzL2Nhcm91c2VsL2Nhcm91c2VsLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQUE7RUFDQSxVQUFBO0VBQ0EsV0FBQTtDQ0NEO0FERUQ7RUFDRSxpQkFBQTtDQ0FEO0FER0Q7RUFDRSxjQUFBO0NDREQiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2Nhcm91c2VsL2Nhcm91c2VsLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsidWwge1xuICBsaXN0LXN0eWxlOiBub25lO1xuICBtYXJnaW46IDA7XG4gIHBhZGRpbmc6IDA7XG59XG5cbi5jYXJvdXNlbC13cmFwcGVyIHtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLmNhcm91c2VsLWlubmVyIHtcbiAgZGlzcGxheTogZmxleDtcbn1cbiIsInVsIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbiAgbWFyZ2luOiAwO1xuICBwYWRkaW5nOiAwO1xufVxuLmNhcm91c2VsLXdyYXBwZXIge1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuLmNhcm91c2VsLWlubmVyIHtcbiAgZGlzcGxheTogZmxleDtcbn1cbiJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/components/carousel/carousel.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/components/carousel/carousel.component.ts ***!
+  \***********************************************************/
+/*! exports provided: CarouselItemElement, CarouselComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarouselItemElement", function() { return CarouselItemElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarouselComponent", function() { return CarouselComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
+/* harmony import */ var _directives_carousel_item_directive__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../directives/carousel-item.directive */ "./src/app/directives/carousel-item.directive.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CarouselItemElement = /** @class */ (function () {
+    function CarouselItemElement() {
+    }
+    CarouselItemElement = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"])({
+            selector: '.carousel-item'
+        })
+    ], CarouselItemElement);
+    return CarouselItemElement;
+}());
+
+var CarouselComponent = /** @class */ (function () {
+    function CarouselComponent(builder) {
+        this.builder = builder;
+        this.timing = '250ms ease-in';
+        this.showControls = true;
+        this.currentSlide = 0;
+        this.carouselWrapperStyle = {};
+    }
+    CarouselComponent.prototype.next = function () {
+        if (this.currentSlide + 1 === this.items.length)
+            return;
+        this.currentSlide = (this.currentSlide + 1) % this.items.length;
+        var offset = this.currentSlide * this.itemWidth;
+        var myAnimation = this.buildAnimation(offset);
+        this.player = myAnimation.create(this.carousel.nativeElement);
+        this.player.play();
+    };
+    CarouselComponent.prototype.buildAnimation = function (offset) {
+        return this.builder.build([
+            Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])(this.timing, Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: "translateX(-" + offset + "px)" }))
+        ]);
+    };
+    CarouselComponent.prototype.prev = function () {
+        if (this.currentSlide === 0)
+            return;
+        this.currentSlide = ((this.currentSlide - 1) + this.items.length) % this.items.length;
+        var offset = this.currentSlide * this.itemWidth;
+        var myAnimation = this.buildAnimation(offset);
+        this.player = myAnimation.create(this.carousel.nativeElement);
+        this.player.play();
+    };
+    CarouselComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        // For some reason only here I need to add setTimeout, in my local env it's working without this.
+        setTimeout(function () {
+            _this.itemWidth = _this.itemsElements.first.nativeElement.getBoundingClientRect().width;
+            _this.carouselWrapperStyle = {
+                width: _this.itemWidth + "px"
+            };
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChildren"])(_directives_carousel_item_directive__WEBPACK_IMPORTED_MODULE_2__["CarouselItemDirective"]),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["QueryList"])
+    ], CarouselComponent.prototype, "items", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChildren"])(CarouselItemElement, { read: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["QueryList"])
+    ], CarouselComponent.prototype, "itemsElements", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('carousel'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], CarouselComponent.prototype, "carousel", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], CarouselComponent.prototype, "timing", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], CarouselComponent.prototype, "showControls", void 0);
+    CarouselComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'carousel',
+            exportAs: 'carousel',
+            template: __webpack_require__(/*! ./carousel.component.html */ "./src/app/components/carousel/carousel.component.html"),
+            styles: [__webpack_require__(/*! ./carousel.component.less */ "./src/app/components/carousel/carousel.component.less")]
+        }),
+        __metadata("design:paramtypes", [_angular_animations__WEBPACK_IMPORTED_MODULE_1__["AnimationBuilder"]])
+    ], CarouselComponent);
+    return CarouselComponent;
 }());
 
 
@@ -194,7 +337,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <div class=\"diagram\" id=\"archiDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"devOpsDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"databaseDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"devDiagram\"> --@-- </div>\n  <div class=\"diagram\" id=\"sysAppDiagram\"> --@-- </div>\n</div>\n"
+module.exports = "<div style=\"margin: 2em\" class=\"container\">\n  <carousel>\n    <ng-container *ngFor=\"let item of items;\">\n      <ng-container *carouselItem>\n        <div class=\"item\" id=\"{{item.id}}\"> --@-- </div>\n      </ng-container>\n    </ng-container>\n  </carousel>\n</div>\n<div class=\"item\" id=\"devDiagram\"> --@-- </div>\n<div class=\"item\" id=\"sysAppDiagram\"> --@-- </div>\n"
 
 /***/ }),
 
@@ -247,8 +390,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var DiagramComponent = /** @class */ (function () {
     function DiagramComponent() {
+        this.items = [
+            { id: 'archiDiagram' },
+            { id: 'devOpsDiagram' },
+            { id: 'databaseDiagram' }
+        ];
     }
-    DiagramComponent.prototype.ngOnInit = function () {
+    DiagramComponent.prototype.ngAfterViewInit = function () {
         new Treant(archi_config);
         new Treant(devops_config);
         new Treant(database_config);
@@ -392,6 +540,44 @@ var HeaderComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], HeaderComponent);
     return HeaderComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/directives/carousel-item.directive.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/directives/carousel-item.directive.ts ***!
+  \*******************************************************/
+/*! exports provided: CarouselItemDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarouselItemDirective", function() { return CarouselItemDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var CarouselItemDirective = /** @class */ (function () {
+    function CarouselItemDirective(tpl) {
+        this.tpl = tpl;
+    }
+    CarouselItemDirective = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"])({
+            selector: '[carouselItem]'
+        }),
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"]])
+    ], CarouselItemDirective);
+    return CarouselItemDirective;
 }());
 
 
