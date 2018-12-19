@@ -236,7 +236,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showControls\" class=\"slide-button\">\n  <button mat-raised-button (click)=\"prev()\" class=\"btn btn-default\">Prev</button>\n  <button mat-raised-button (click)=\"next()\" class=\"btn btn-default\">Next</button>\n</div>\n<section class=\"carousel-wrapper\" [ngStyle]=\"carouselWrapperStyle\">\n  <ul class=\"carousel-inner\" #carousel>\n    <li *ngFor=\"let item of items;\" class=\"carousel-item\">\n      <ng-container [ngTemplateOutlet]=\"item.tpl\"></ng-container>\n    </li>\n  </ul>\n</section>\n"
+module.exports = "<div class=\"slide-button\">\n  <button mat-raised-button (click)=\"prev()\" class=\"btn btn-default\">Prev</button>\n  <button mat-raised-button (click)=\"next()\" class=\"btn btn-default\">Next</button>\n</div>\n<section class=\"carousel-wrapper\" [ngStyle]=\"carouselWrapperStyle\">\n  <ul class=\"carousel-inner\" #carousel>\n    <li *ngFor=\"let item of items;\" class=\"carousel-item\">\n      <ng-container [ngTemplateOutlet]=\"item.tpl\"></ng-container>\n    </li>\n  </ul>\n</section>\n"
 
 /***/ }),
 
@@ -292,7 +292,6 @@ var CarouselComponent = /** @class */ (function () {
     function CarouselComponent(builder) {
         this.builder = builder;
         this.timing = '250ms ease-in';
-        this.showControls = true;
         this.currentSlide = 0;
         this.carouselWrapperStyle = {};
     }
@@ -345,10 +344,6 @@ var CarouselComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
     ], CarouselComponent.prototype, "timing", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], CarouselComponent.prototype, "showControls", void 0);
     CarouselComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'carousel',
@@ -372,7 +367,7 @@ var CarouselComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"item\" id=\"devDiagram\"> --@-- </div>\n</div>\n"
+module.exports = "<main class=\"Index\" data-controller=\"IndexFirstSectionHeight, Parallax, IndexNavigation\">\n  <section id=\"resume-header\" class=\"Index-page Index-page--has-image\"  data-parallax-original-element data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content  vba-alternate-block-style-container\">\n      <h1 align=\"center\">DEV SKILLS</h1>\n    </div>\n  </section>\n  <section *ngIf=\"!isMobile\" id=\"resume-content\" class=\"Index-page\" data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content\">\n      <div class=\"container\">\n        <div class=\"item\" id=\"devDiagram\"></div>\n      </div>\n    </div>\n  </section>\n  <section *ngIf=\"isMobile\" id=\"resume-content\" class=\"Index-page\" data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content \">\n      <div class=\"container\">\n        <carousel>\n          <ng-container *ngFor=\"let item of items;\">\n            <ng-container *carouselItem>\n              <div class=\"item\" id=\"{{item.id}}\"></div>\n            </ng-container>\n          </ng-container>\n        </carousel>\n      </div>\n    </div>\n  </section>\n</main>\n"
 
 /***/ }),
 
@@ -404,6 +399,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_js_Treant_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_js_Treant_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _assets_js_devDiagram_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../assets/js/devDiagram.js */ "./src/assets/js/devDiagram.js");
 /* harmony import */ var _assets_js_devDiagram_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_js_devDiagram_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _assets_js_devDiagramInline_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../assets/js/devDiagramInline.js */ "./src/assets/js/devDiagramInline.js");
+/* harmony import */ var _assets_js_devDiagramInline_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_js_devDiagramInline_js__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -417,12 +414,50 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var DevDiagramComponent = /** @class */ (function () {
     function DevDiagramComponent() {
+        this.items = [
+            { id: 'frontendDiagram' },
+            { id: 'backendDiagram' }
+        ];
     }
-    DevDiagramComponent.prototype.ngOnInit = function () {
-        new Treant(dev_config);
+    DevDiagramComponent.prototype.ngAfterContentInit = function () {
+        if (window.innerWidth > 980) {
+            this.isMobile = false;
+            setTimeout(function () {
+                new Treant(dev_config);
+            });
+        }
+        else {
+            this.isMobile = true;
+            setTimeout(function () {
+                new Treant(frontend_config);
+                new Treant(backend_config);
+            });
+        }
     };
+    DevDiagramComponent.prototype.onResize = function (event) {
+        if (event.target.innerWidth > 980) {
+            this.isMobile = false;
+            setTimeout(function () {
+                new Treant(dev_config);
+            });
+        }
+        else {
+            this.isMobile = true;
+            setTimeout(function () {
+                new Treant(frontend_config);
+                new Treant(backend_config);
+            });
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"])('window:resize', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], DevDiagramComponent.prototype, "onResize", null);
     DevDiagramComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-dev-diagram',
@@ -445,7 +480,7 @@ var DevDiagramComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <carousel>\n    <ng-container *ngFor=\"let item of items;\">\n      <ng-container *carouselItem>\n        <div class=\"item\" id=\"{{item.id}}\"> --@-- </div>\n      </ng-container>\n    </ng-container>\n  </carousel>\n</div>\n"
+module.exports = "<main class=\"Index\" data-controller=\"IndexFirstSectionHeight, Parallax, IndexNavigation\">\n  <section id=\"resume-header\" class=\"Index-page Index-page--has-image\"  data-parallax-original-element data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content  vba-alternate-block-style-container\">\n      <h1 align=\"center\">EXTRA SKILLS</h1>\n    </div>\n  </section>\n  <section id=\"resume-content\" class=\"Index-page\" data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content \">\n      <div class=\"container\">\n        <carousel>\n          <ng-container *ngFor=\"let item of items;\">\n            <ng-container *carouselItem>\n              <div class=\"item\" id=\"{{item.id}}\"> --@-- </div>\n            </ng-container>\n          </ng-container>\n        </carousel>\n      </div>\n    </div>\n  </section>\n</main>\n"
 
 /***/ }),
 
@@ -492,8 +527,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var DiagramComponent = /** @class */ (function () {
     function DiagramComponent() {
-        this.dev = false;
-        this.sysApp = false;
         this.items = [
             { id: 'archiDiagram' },
             { id: 'devOpsDiagram' },
@@ -592,7 +625,7 @@ var FooterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"Header Header--bottom Header--overlay\">\n  <div class=\"Header-inner Header-inner--bottom\">\n    <div data-nc-container=\"bottom-left\">\n    </div>\n    <div data-nc-container=\"bottom-center\">\n    </div>\n    <div data-nc-container=\"bottom-right\">\n      <nav class=\"Header-nav Header-nav--primary\" data-nc-element=\"primary-nav\" data-content-field=\"navigation\">\n          <div class=\"Header-nav-inner\">\n            <button mat-icon-button (click)=\"openMenu()\" [matMenuTriggerFor]=\"appMenu\" fxShow=\"true\" fxHide.gt-xs>\n              <mat-icon class=\"white-icon\">{{icon}}</mat-icon>\n              <a [routerLink]=\"['/home']\"><img src=\"/assets/img/computhand.png\" alt=\"logo\" /></a>\n            </button>\n            <span class=\"menu-spacer\"></span>\n            <div fxShow=\"true\" fxHide.lt-sm>\n              <!-- The following menu items will be hidden on both SM and XS screen sizes -->\n              <a class=\"Header-nav-item\" [routerLink]=\"['/home']\">Home</a>\n              <a class=\"Header-nav-item\" [routerLink]=\"['/resume']\">Resume</a>\n              <a class=\"Header-nav-item\">Development Skills</a>\n              <a class=\"Header-nav-item\">System Skills</a>\n              <a class=\"Header-nav-item\">Extra Skills</a>\n              <a [routerLink]=\"['/home']\"><img src=\"/assets/img/computhand.png\" alt=\"logo\" /></a>\n            </div>\n            <mat-menu class=\"app-menu\" #appMenu=\"matMenu\" fxFlexFill>\n              <button class=\"hover-effect\" mat-button [routerLink]=\"['/home']\">Home</button>\n              <button class=\"hover-effect\" mat-button [routerLink]=\"['/resume']\">Resume</button>\n              <button class=\"hover-effect\" mat-button>Development Skills</button>\n              <button class=\"hover-effect\" mat-button>System Skills</button>\n              <button class=\"hover-effect\" mat-button>Extra Skills</button>\n            </mat-menu>\n          </div>\n      </nav>\n    </div>\n  </div>\n</header>\n"
+module.exports = "<header class=\"Header Header--bottom Header--overlay\">\n  <div class=\"Header-inner Header-inner--bottom\">\n    <div data-nc-container=\"bottom-left\">\n      <nav class=\"Header-nav Header-nav--primary\" data-nc-element=\"primary-nav\" data-content-field=\"navigation\">\n          <div class=\"Header-nav-inner\">\n            <button mat-icon-button (click)=\"openMenu()\" [matMenuTriggerFor]=\"appMenu\" fxShow=\"true\" fxHide.gt-xs>\n              <mat-icon class=\"white-icon\">{{icon}}</mat-icon>\n            </button>\n            <span class=\"menu-spacer\"></span>\n            <div fxShow=\"true\" fxHide.lt-sm>\n              <!-- The following menu items will be hidden on both SM and XS screen sizes -->\n              <a class=\"Header-nav-item\" [routerLink]=\"['/home']\">Home</a>\n              <a class=\"Header-nav-item\" [routerLink]=\"['/resume']\">Resume</a>\n              <a class=\"Header-nav-item\" [routerLink]=\"['/devdiagram']\">Development Skills</a>\n              <a class=\"Header-nav-item\" [routerLink]=\"['/sysdiagram']\">System Skills</a>\n              <a class=\"Header-nav-item\" [routerLink]=\"['/diagram']\">Extra Skills</a>\n            </div>\n            <mat-menu class=\"app-menu\" #appMenu=\"matMenu\" fxFlexFill>\n              <button class=\"hover-effect\" mat-button [routerLink]=\"['/home']\">Home</button>\n              <button class=\"hover-effect\" mat-button [routerLink]=\"['/resume']\">Resume</button>\n              <button class=\"hover-effect\" mat-button [routerLink]=\"['/devdiagram']\">Development Skills</button>\n              <button class=\"hover-effect\" mat-button [routerLink]=\"['/sysdiagram']\">System Skills</button>\n              <button class=\"hover-effect\" mat-button [routerLink]=\"['/diagram']\">Extra Skills</button>\n            </mat-menu>\n          </div>\n      </nav>\n    </div>\n    <div data-nc-container=\"bottom-center\">\n    </div>\n    <div data-nc-container=\"bottom-right\">\n      <div class=\"logo\">\n        <a [routerLink]=\"['/home']\"><img src=\"/assets/img/computhand.png\" alt=\"logo\"/></a>\n      </div>\n    </div>\n  </div>\n</header>\n"
 
 /***/ }),
 
@@ -603,7 +636,7 @@ module.exports = "<header class=\"Header Header--bottom Header--overlay\">\n  <d
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".Header [data-nc-element] {\n  padding: 10px 10px;\n}\n.Header-inner {\n  box-sizing: border-box;\n  padding-left: 50px;\n  padding-right: 50px;\n}\n.Header-inner {\n  box-sizing: border-box;\n  padding-left: 50px;\n  padding-right: 50px;\n}\n@media screen and (max-width: 960px) {\n  .Header-inner {\n    padding-left: 38px;\n    padding-right: 38px;\n  }\n}\n@media screen and (max-width: 768px) {\n  .Header-inner {\n    padding-left: 26px;\n    padding-right: 26px;\n  }\n}\n@media screen and (max-width: 640px) {\n  .Header-inner {\n    padding-left: 10px;\n    padding-right: 10px;\n  }\n}\n.Header-inner--bottom {\n  padding-top: 20px;\n}\n.Header.Header--bottom {\n  min-height: 112px;\n}\n.Header--bottom.Header--overlay {\n  box-sizing: border-box;\n  position: absolute;\n  top: 0;\n  left: 0;\n  background: transparent;\n  z-index: 1000;\n  width: 100%;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n.Header-nav {\n  white-space: nowrap;\n  line-height: 1em;\n  font-family: Arial, Helvetica, sans-serif;\n  font-weight: 700;\n  font-size: 14px;\n  letter-spacing: 0em;\n  font-family: proxima-nova;\n  font-weight: 400;\n  font-style: normal;\n  font-size: 13px;\n  letter-spacing: 0.15em;\n  text-transform: uppercase;\n}\n.Header-nav-item {\n  display: inline-block;\n  vertical-align: middle;\n  color: #FFF;\n}\n@media only screen and (min-width: 850px) {\n  .Header-nav--primary .Header-nav-item,\n  .Header-nav--secondary .Header-nav-item {\n    padding: 12px 18px;\n    margin: 0.618em 1em;\n  }\n}\n@media only screen and (max-width: 885px) {\n  .Header .Header-nav .Header-nav-item {\n    font-size: 12px;\n    margin: 0 0.6em;\n  }\n}\n.menu-spacer {\n  flex: 1 1 auto;\n}\n.white-icon {\n  color: white;\n}\n.mat-menu-panel.app-menu {\n  min-width: 112px;\n  max-width: 152px;\n  overflow: auto;\n  -webkit-overflow-scrolling: touch;\n  max-height: calc(100vh - 48px);\n  border-radius: 4px;\n  outline: 0;\n}\n.hover-effect.mat-button:hover .mat-button-focus-overlay {\n  opacity: 0.3;\n  min-width: 152px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3dhbGxhY2UvRGV2L1dvcmtzcGFjZS9wcmVzZW50YXRpb25XZWJTaXRlL3NyYy9hcHAvY29tcG9uZW50cy9oZWFkZXIvaGVhZGVyLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9jb21wb25lbnRzL2hlYWRlci9oZWFkZXIuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRyxtQkFBQTtDQ0NGO0FEQ0Q7RUFHRyx1QkFBQTtFQUNBLG1CQUFBO0VBQ0Esb0JBQUE7Q0NDRjtBRENEO0VBR0csdUJBQUE7RUFDQSxtQkFBQTtFQUNBLG9CQUFBO0NDQ0Y7QURDRDtFQUNHO0lBQ0ksbUJBQUE7SUFDQSxvQkFBQTtHQ0NKO0NBQ0Y7QURDRDtFQUNHO0lBQ0ksbUJBQUE7SUFDQSxvQkFBQTtHQ0NKO0NBQ0Y7QURDRDtFQUNHO0lBQ0ksbUJBQUE7SUFDQSxvQkFBQTtHQ0NKO0NBQ0Y7QURDRDtFQUNHLGtCQUFBO0NDQ0Y7QURDRDtFQUNHLGtCQUFBO0NDQ0Y7QURDRDtFQUdJLHVCQUFBO0VBQ0EsbUJBQUE7RUFDQSxPQUFBO0VBQ0EsUUFBQTtFQUNBLHdCQUFBO0VBQ0EsY0FBQTtFQUNBLFlBQUE7RUFDQSxvQ0FBQTtFQUNBLG1DQUFBO0NDQ0g7QURDRDtFQUNHLG9CQUFBO0VBQ0EsaUJBQUE7RUFDQSwwQ0FBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxvQkFBQTtFQUNBLDBCQUFBO0VBQ0EsaUJBQUE7RUFDQSxtQkFBQTtFQUNBLGdCQUFBO0VBQ0EsdUJBQUE7RUFDQSwwQkFBQTtDQ0NGO0FEQ0Q7RUFDRyxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EsWUFBQTtDQ0NGO0FEQ0Q7RUFDRTs7SUFFRyxtQkFBQTtJQUNBLG9CQUFBO0dDQ0Y7Q0FDRjtBRENEO0VBQ0c7SUFDSSxnQkFBQTtJQUNBLGdCQUFBO0dDQ0o7Q0FDRjtBRENEO0VBQ0UsZUFBQTtDQ0NEO0FEQ0Q7RUFDSSxhQUFBO0NDQ0g7QURDRDtFQUNJLGlCQUFBO0VBQ0EsaUJBQUE7RUFDQSxlQUFBO0VBQ0Esa0NBQUE7RUFDQSwrQkFBQTtFQUNBLG1CQUFBO0VBQ0EsV0FBQTtDQ0NIO0FEQ0Q7RUFDRSxhQUFBO0VBQ0EsaUJBQUE7Q0NDRCIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaGVhZGVyL2hlYWRlci5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIi5IZWFkZXIgW2RhdGEtbmMtZWxlbWVudF17XG4gICBwYWRkaW5nOjEwcHggMTBweDtcbn1cbi5IZWFkZXItaW5uZXJ7XG4gICAtd2Via2l0LWJveC1zaXppbmc6Ym9yZGVyLWJveDtcbiAgIC1tb3otYm94LXNpemluZzpib3JkZXItYm94O1xuICAgYm94LXNpemluZzpib3JkZXItYm94O1xuICAgcGFkZGluZy1sZWZ0OjUwcHg7XG4gICBwYWRkaW5nLXJpZ2h0OjUwcHg7XG59XG4uSGVhZGVyLWlubmVye1xuICAgLXdlYmtpdC1ib3gtc2l6aW5nOmJvcmRlci1ib3g7XG4gICAtbW96LWJveC1zaXppbmc6Ym9yZGVyLWJveDtcbiAgIGJveC1zaXppbmc6Ym9yZGVyLWJveDtcbiAgIHBhZGRpbmctbGVmdDo1MHB4O1xuICAgcGFkZGluZy1yaWdodDo1MHB4XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOjk2MHB4KXtcbiAgIC5IZWFkZXItaW5uZXJ7XG4gICAgICAgcGFkZGluZy1sZWZ0OjM4cHg7XG4gICAgICAgcGFkZGluZy1yaWdodDozOHB4O1xuICAgfVxufVxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDo3NjhweCl7XG4gICAuSGVhZGVyLWlubmVye1xuICAgICAgIHBhZGRpbmctbGVmdDoyNnB4O1xuICAgICAgIHBhZGRpbmctcmlnaHQ6MjZweDtcbiAgIH1cbn1cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6NjQwcHgpe1xuICAgLkhlYWRlci1pbm5lcntcbiAgICAgICBwYWRkaW5nLWxlZnQ6MTBweDtcbiAgICAgICBwYWRkaW5nLXJpZ2h0OjEwcHg7XG4gICB9XG59XG4uSGVhZGVyLWlubmVyLS1ib3R0b217XG4gICBwYWRkaW5nLXRvcDoyMHB4O1xufVxuLkhlYWRlci5IZWFkZXItLWJvdHRvbXtcbiAgIG1pbi1oZWlnaHQ6MTEycHg7XG59XG4uSGVhZGVyLS1ib3R0b20uSGVhZGVyLS1vdmVybGF5e1xuICAgIC13ZWJraXQtYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG4gICAgei1pbmRleDogMTAwMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDtcbiAgICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlO1xufVxuLkhlYWRlci1uYXZ7XG4gICB3aGl0ZS1zcGFjZTpub3dyYXA7XG4gICBsaW5lLWhlaWdodDoxZW07XG4gICBmb250LWZhbWlseTpBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZjtcbiAgIGZvbnQtd2VpZ2h0OjcwMDtcbiAgIGZvbnQtc2l6ZToxNHB4O1xuICAgbGV0dGVyLXNwYWNpbmc6MGVtO1xuICAgZm9udC1mYW1pbHk6cHJveGltYS1ub3ZhO1xuICAgZm9udC13ZWlnaHQ6NDAwO1xuICAgZm9udC1zdHlsZTpub3JtYWw7XG4gICBmb250LXNpemU6MTNweDtcbiAgIGxldHRlci1zcGFjaW5nOi4xNWVtO1xuICAgdGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlO1xufVxuLkhlYWRlci1uYXYtaXRlbXtcbiAgIGRpc3BsYXk6aW5saW5lLWJsb2NrO1xuICAgdmVydGljYWwtYWxpZ246bWlkZGxlO1xuICAgY29sb3I6I0ZGRjtcbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDo4NTBweCl7XG4gIC5IZWFkZXItbmF2LS1wcmltYXJ5IC5IZWFkZXItbmF2LWl0ZW0sXG4gIC5IZWFkZXItbmF2LS1zZWNvbmRhcnkgLkhlYWRlci1uYXYtaXRlbXtcbiAgICAgcGFkZGluZzoxMnB4IDE4cHg7XG4gICAgIG1hcmdpbjouNjE4ZW0gMWVtXG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDo4ODVweCl7XG4gICAuSGVhZGVyIC5IZWFkZXItbmF2IC5IZWFkZXItbmF2LWl0ZW17XG4gICAgICAgZm9udC1zaXplOjEycHg7XG4gICAgICAgbWFyZ2luOjAgLjZlbTtcbiAgIH1cbn1cbi5tZW51LXNwYWNlciB7XG4gIGZsZXg6IDEgMSBhdXRvO1xufVxuLndoaXRlLWljb24ge1xuICAgIGNvbG9yOiB3aGl0ZTtcbn1cbi5tYXQtbWVudS1wYW5lbC5hcHAtbWVudSB7XG4gICAgbWluLXdpZHRoOiAxMTJweDtcbiAgICBtYXgtd2lkdGg6IDE1MnB4O1xuICAgIG92ZXJmbG93OiBhdXRvO1xuICAgIC13ZWJraXQtb3ZlcmZsb3ctc2Nyb2xsaW5nOiB0b3VjaDtcbiAgICBtYXgtaGVpZ2h0OiBjYWxjKDEwMHZoIC0gNDhweCk7XG4gICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgIG91dGxpbmU6IDA7XG59XG4uaG92ZXItZWZmZWN0Lm1hdC1idXR0b246aG92ZXIgLm1hdC1idXR0b24tZm9jdXMtb3ZlcmxheXtcbiAgb3BhY2l0eTowLjM7XG4gIG1pbi13aWR0aDoxNTJweDtcbn1cbiIsIi5IZWFkZXIgW2RhdGEtbmMtZWxlbWVudF0ge1xuICBwYWRkaW5nOiAxMHB4IDEwcHg7XG59XG4uSGVhZGVyLWlubmVyIHtcbiAgLXdlYmtpdC1ib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIHBhZGRpbmctbGVmdDogNTBweDtcbiAgcGFkZGluZy1yaWdodDogNTBweDtcbn1cbi5IZWFkZXItaW5uZXIge1xuICAtd2Via2l0LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIC1tb3otYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcGFkZGluZy1sZWZ0OiA1MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiA1MHB4O1xufVxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogOTYwcHgpIHtcbiAgLkhlYWRlci1pbm5lciB7XG4gICAgcGFkZGluZy1sZWZ0OiAzOHB4O1xuICAgIHBhZGRpbmctcmlnaHQ6IDM4cHg7XG4gIH1cbn1cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2OHB4KSB7XG4gIC5IZWFkZXItaW5uZXIge1xuICAgIHBhZGRpbmctbGVmdDogMjZweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiAyNnB4O1xuICB9XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2NDBweCkge1xuICAuSGVhZGVyLWlubmVyIHtcbiAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gICAgcGFkZGluZy1yaWdodDogMTBweDtcbiAgfVxufVxuLkhlYWRlci1pbm5lci0tYm90dG9tIHtcbiAgcGFkZGluZy10b3A6IDIwcHg7XG59XG4uSGVhZGVyLkhlYWRlci0tYm90dG9tIHtcbiAgbWluLWhlaWdodDogMTEycHg7XG59XG4uSGVhZGVyLS1ib3R0b20uSGVhZGVyLS1vdmVybGF5IHtcbiAgLXdlYmtpdC1ib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbiAgei1pbmRleDogMTAwMDtcbiAgd2lkdGg6IDEwMCU7XG4gIC13ZWJraXQtZm9udC1zbW9vdGhpbmc6IGFudGlhbGlhc2VkO1xuICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlO1xufVxuLkhlYWRlci1uYXYge1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBsaW5lLWhlaWdodDogMWVtO1xuICBmb250LWZhbWlseTogQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZjtcbiAgZm9udC13ZWlnaHQ6IDcwMDtcbiAgZm9udC1zaXplOiAxNHB4O1xuICBsZXR0ZXItc3BhY2luZzogMGVtO1xuICBmb250LWZhbWlseTogcHJveGltYS1ub3ZhO1xuICBmb250LXdlaWdodDogNDAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGZvbnQtc2l6ZTogMTNweDtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMTVlbTtcbiAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcbn1cbi5IZWFkZXItbmF2LWl0ZW0ge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gIGNvbG9yOiAjRkZGO1xufVxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA4NTBweCkge1xuICAuSGVhZGVyLW5hdi0tcHJpbWFyeSAuSGVhZGVyLW5hdi1pdGVtLFxuICAuSGVhZGVyLW5hdi0tc2Vjb25kYXJ5IC5IZWFkZXItbmF2LWl0ZW0ge1xuICAgIHBhZGRpbmc6IDEycHggMThweDtcbiAgICBtYXJnaW46IDAuNjE4ZW0gMWVtO1xuICB9XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDg4NXB4KSB7XG4gIC5IZWFkZXIgLkhlYWRlci1uYXYgLkhlYWRlci1uYXYtaXRlbSB7XG4gICAgZm9udC1zaXplOiAxMnB4O1xuICAgIG1hcmdpbjogMCAwLjZlbTtcbiAgfVxufVxuLm1lbnUtc3BhY2VyIHtcbiAgZmxleDogMSAxIGF1dG87XG59XG4ud2hpdGUtaWNvbiB7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cbi5tYXQtbWVudS1wYW5lbC5hcHAtbWVudSB7XG4gIG1pbi13aWR0aDogMTEycHg7XG4gIG1heC13aWR0aDogMTUycHg7XG4gIG92ZXJmbG93OiBhdXRvO1xuICAtd2Via2l0LW92ZXJmbG93LXNjcm9sbGluZzogdG91Y2g7XG4gIG1heC1oZWlnaHQ6IGNhbGMoMTAwdmggLSA0OHB4KTtcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xuICBvdXRsaW5lOiAwO1xufVxuLmhvdmVyLWVmZmVjdC5tYXQtYnV0dG9uOmhvdmVyIC5tYXQtYnV0dG9uLWZvY3VzLW92ZXJsYXkge1xuICBvcGFjaXR5OiAwLjM7XG4gIG1pbi13aWR0aDogMTUycHg7XG59XG4iXX0= */"
+module.exports = ".Header [data-nc-element] {\n  padding: 10px 10px;\n}\n.Header-inner {\n  box-sizing: border-box;\n  padding-left: 50px;\n  padding-right: 50px;\n}\n.Header-inner {\n  box-sizing: border-box;\n  padding-left: 50px;\n  padding-right: 50px;\n}\n@media screen and (max-width: 960px) {\n  .Header-inner {\n    padding-left: 38px;\n    padding-right: 38px;\n  }\n}\n@media screen and (max-width: 768px) {\n  .Header-inner {\n    padding-left: 26px;\n    padding-right: 26px;\n  }\n}\n@media screen and (max-width: 640px) {\n  .Header-inner {\n    padding-left: 10px;\n    padding-right: 10px;\n  }\n}\n.Header-inner--bottom {\n  padding-top: 20px;\n}\n.Header.Header--bottom {\n  min-height: 112px;\n}\n.Header--bottom.Header--overlay {\n  box-sizing: border-box;\n  position: absolute;\n  top: 0;\n  left: 0;\n  background: transparent;\n  z-index: 1000;\n  width: 100%;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n.Header-nav {\n  white-space: nowrap;\n  line-height: 1em;\n  font-family: Arial, Helvetica, sans-serif;\n  font-weight: 700;\n  font-size: 14px;\n  letter-spacing: 0em;\n  font-family: proxima-nova;\n  font-weight: 400;\n  font-style: normal;\n  font-size: 13px;\n  letter-spacing: 0.15em;\n  text-transform: uppercase;\n}\n.Header-nav-item {\n  display: inline-block;\n  vertical-align: middle;\n  color: #FFF;\n}\n@media only screen and (min-width: 850px) {\n  .Header-nav--primary .Header-nav-item,\n  .Header-nav--secondary .Header-nav-item {\n    padding: 12px 18px;\n    margin: 0.618em 1em;\n  }\n}\n@media only screen and (max-width: 885px) {\n  .Header .Header-nav .Header-nav-item {\n    font-size: 12px;\n    margin: 0 0.6em;\n  }\n}\n.menu-spacer {\n  flex: 1 1 auto;\n}\n.white-icon {\n  color: white;\n}\n.mat-menu-panel.app-menu {\n  min-width: 112px;\n  max-width: 152px;\n  overflow: auto;\n  -webkit-overflow-scrolling: touch;\n  max-height: calc(100vh - 48px);\n  border-radius: 4px;\n  outline: 0;\n}\n.hover-effect.mat-button:hover .mat-button-focus-overlay {\n  opacity: 0.3;\n  min-width: 152px;\n}\n@media only screen and (min-width: 1200px) {\n  .logo img {\n    float: right;\n    position: absolute;\n    top: 15%;\n    left: 75%;\n  }\n}\n@media only screen and (min-width: 601px) and (max-width: 1199px) {\n  .logo img {\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n  }\n}\n@media only screen and (max-width: 600px) {\n  .logo img {\n    float: right;\n    position: absolute;\n    top: 15%;\n    left: 50%;\n  }\n}\n@media only screen and (max-width: 370px) {\n  .logo img {\n    display: none;\n  }\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3dhbGxhY2UvRGV2L1dvcmtzcGFjZS9wcmVzZW50YXRpb25XZWJTaXRlL3NyYy9hcHAvY29tcG9uZW50cy9oZWFkZXIvaGVhZGVyLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9jb21wb25lbnRzL2hlYWRlci9oZWFkZXIuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRyxtQkFBQTtDQ0NGO0FEQ0Q7RUFHRyx1QkFBQTtFQUNBLG1CQUFBO0VBQ0Esb0JBQUE7Q0NDRjtBRENEO0VBR0csdUJBQUE7RUFDQSxtQkFBQTtFQUNBLG9CQUFBO0NDQ0Y7QURDRDtFQUNHO0lBQ0ksbUJBQUE7SUFDQSxvQkFBQTtHQ0NKO0NBQ0Y7QURDRDtFQUNHO0lBQ0ksbUJBQUE7SUFDQSxvQkFBQTtHQ0NKO0NBQ0Y7QURDRDtFQUNHO0lBQ0ksbUJBQUE7SUFDQSxvQkFBQTtHQ0NKO0NBQ0Y7QURDRDtFQUNHLGtCQUFBO0NDQ0Y7QURDRDtFQUNHLGtCQUFBO0NDQ0Y7QURDRDtFQUdJLHVCQUFBO0VBQ0EsbUJBQUE7RUFDQSxPQUFBO0VBQ0EsUUFBQTtFQUNBLHdCQUFBO0VBQ0EsY0FBQTtFQUNBLFlBQUE7RUFDQSxvQ0FBQTtFQUNBLG1DQUFBO0NDQ0g7QURDRDtFQUNHLG9CQUFBO0VBQ0EsaUJBQUE7RUFDQSwwQ0FBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxvQkFBQTtFQUNBLDBCQUFBO0VBQ0EsaUJBQUE7RUFDQSxtQkFBQTtFQUNBLGdCQUFBO0VBQ0EsdUJBQUE7RUFDQSwwQkFBQTtDQ0NGO0FEQ0Q7RUFDRyxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EsWUFBQTtDQ0NGO0FEQ0Q7RUFDRTs7SUFFRyxtQkFBQTtJQUNBLG9CQUFBO0dDQ0Y7Q0FDRjtBRENEO0VBQ0c7SUFDSSxnQkFBQTtJQUNBLGdCQUFBO0dDQ0o7Q0FDRjtBRENEO0VBQ0UsZUFBQTtDQ0NEO0FEQ0Q7RUFDSSxhQUFBO0NDQ0g7QURDRDtFQUNJLGlCQUFBO0VBQ0EsaUJBQUE7RUFDQSxlQUFBO0VBQ0Esa0NBQUE7RUFDQSwrQkFBQTtFQUNBLG1CQUFBO0VBQ0EsV0FBQTtDQ0NIO0FEQ0Q7RUFDRSxhQUFBO0VBQ0EsaUJBQUE7Q0NDRDtBREVEO0VBQ0U7SUFDRSxhQUFBO0lBQ0EsbUJBQUE7SUFDQSxTQUFBO0lBQ0EsVUFBQTtHQ0FEO0NBQ0Y7QURFRDtFQUNFO0lBQ0UsZUFBQTtJQUNBLGtCQUFBO0lBQ0EsbUJBQUE7R0NBRDtDQUNGO0FERUQ7RUFDRTtJQUNFLGFBQUE7SUFDQSxtQkFBQTtJQUNBLFNBQUE7SUFDQSxVQUFBO0dDQUQ7Q0FDRjtBREVEO0VBQ0U7SUFDRSxjQUFBO0dDQUQ7Q0FDRiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaGVhZGVyL2hlYWRlci5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIi5IZWFkZXIgW2RhdGEtbmMtZWxlbWVudF17XG4gICBwYWRkaW5nOjEwcHggMTBweDtcbn1cbi5IZWFkZXItaW5uZXJ7XG4gICAtd2Via2l0LWJveC1zaXppbmc6Ym9yZGVyLWJveDtcbiAgIC1tb3otYm94LXNpemluZzpib3JkZXItYm94O1xuICAgYm94LXNpemluZzpib3JkZXItYm94O1xuICAgcGFkZGluZy1sZWZ0OjUwcHg7XG4gICBwYWRkaW5nLXJpZ2h0OjUwcHg7XG59XG4uSGVhZGVyLWlubmVye1xuICAgLXdlYmtpdC1ib3gtc2l6aW5nOmJvcmRlci1ib3g7XG4gICAtbW96LWJveC1zaXppbmc6Ym9yZGVyLWJveDtcbiAgIGJveC1zaXppbmc6Ym9yZGVyLWJveDtcbiAgIHBhZGRpbmctbGVmdDo1MHB4O1xuICAgcGFkZGluZy1yaWdodDo1MHB4XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOjk2MHB4KXtcbiAgIC5IZWFkZXItaW5uZXJ7XG4gICAgICAgcGFkZGluZy1sZWZ0OjM4cHg7XG4gICAgICAgcGFkZGluZy1yaWdodDozOHB4O1xuICAgfVxufVxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDo3NjhweCl7XG4gICAuSGVhZGVyLWlubmVye1xuICAgICAgIHBhZGRpbmctbGVmdDoyNnB4O1xuICAgICAgIHBhZGRpbmctcmlnaHQ6MjZweDtcbiAgIH1cbn1cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6NjQwcHgpe1xuICAgLkhlYWRlci1pbm5lcntcbiAgICAgICBwYWRkaW5nLWxlZnQ6MTBweDtcbiAgICAgICBwYWRkaW5nLXJpZ2h0OjEwcHg7XG4gICB9XG59XG4uSGVhZGVyLWlubmVyLS1ib3R0b217XG4gICBwYWRkaW5nLXRvcDoyMHB4O1xufVxuLkhlYWRlci5IZWFkZXItLWJvdHRvbXtcbiAgIG1pbi1oZWlnaHQ6MTEycHg7XG59XG4uSGVhZGVyLS1ib3R0b20uSGVhZGVyLS1vdmVybGF5e1xuICAgIC13ZWJraXQtYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG4gICAgei1pbmRleDogMTAwMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDtcbiAgICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlO1xufVxuLkhlYWRlci1uYXZ7XG4gICB3aGl0ZS1zcGFjZTpub3dyYXA7XG4gICBsaW5lLWhlaWdodDoxZW07XG4gICBmb250LWZhbWlseTpBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZjtcbiAgIGZvbnQtd2VpZ2h0OjcwMDtcbiAgIGZvbnQtc2l6ZToxNHB4O1xuICAgbGV0dGVyLXNwYWNpbmc6MGVtO1xuICAgZm9udC1mYW1pbHk6cHJveGltYS1ub3ZhO1xuICAgZm9udC13ZWlnaHQ6NDAwO1xuICAgZm9udC1zdHlsZTpub3JtYWw7XG4gICBmb250LXNpemU6MTNweDtcbiAgIGxldHRlci1zcGFjaW5nOi4xNWVtO1xuICAgdGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlO1xufVxuLkhlYWRlci1uYXYtaXRlbXtcbiAgIGRpc3BsYXk6aW5saW5lLWJsb2NrO1xuICAgdmVydGljYWwtYWxpZ246bWlkZGxlO1xuICAgY29sb3I6I0ZGRjtcbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDo4NTBweCl7XG4gIC5IZWFkZXItbmF2LS1wcmltYXJ5IC5IZWFkZXItbmF2LWl0ZW0sXG4gIC5IZWFkZXItbmF2LS1zZWNvbmRhcnkgLkhlYWRlci1uYXYtaXRlbXtcbiAgICAgcGFkZGluZzoxMnB4IDE4cHg7XG4gICAgIG1hcmdpbjouNjE4ZW0gMWVtXG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDo4ODVweCl7XG4gICAuSGVhZGVyIC5IZWFkZXItbmF2IC5IZWFkZXItbmF2LWl0ZW17XG4gICAgICAgZm9udC1zaXplOjEycHg7XG4gICAgICAgbWFyZ2luOjAgLjZlbTtcbiAgIH1cbn1cbi5tZW51LXNwYWNlciB7XG4gIGZsZXg6IDEgMSBhdXRvO1xufVxuLndoaXRlLWljb24ge1xuICAgIGNvbG9yOiB3aGl0ZTtcbn1cbi5tYXQtbWVudS1wYW5lbC5hcHAtbWVudSB7XG4gICAgbWluLXdpZHRoOiAxMTJweDtcbiAgICBtYXgtd2lkdGg6IDE1MnB4O1xuICAgIG92ZXJmbG93OiBhdXRvO1xuICAgIC13ZWJraXQtb3ZlcmZsb3ctc2Nyb2xsaW5nOiB0b3VjaDtcbiAgICBtYXgtaGVpZ2h0OiBjYWxjKDEwMHZoIC0gNDhweCk7XG4gICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgIG91dGxpbmU6IDA7XG59XG4uaG92ZXItZWZmZWN0Lm1hdC1idXR0b246aG92ZXIgLm1hdC1idXR0b24tZm9jdXMtb3ZlcmxheXtcbiAgb3BhY2l0eTowLjM7XG4gIG1pbi13aWR0aDoxNTJweDtcbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOjEyMDBweCl7XG4gIC5sb2dvIGltZyB7XG4gICAgZmxvYXQ6IHJpZ2h0O1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDE1JTtcbiAgICBsZWZ0OiA3NSU7XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDo2MDFweCkgYW5kIChtYXgtd2lkdGg6IDExOTlweCl7XG4gIC5sb2dvIGltZyB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gICAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xuICB9XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6NjAwcHgpe1xuICAubG9nbyBpbWcge1xuICAgIGZsb2F0OiByaWdodDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAxNSU7XG4gICAgbGVmdDogNTAlO1xuICB9XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6MzcwcHgpe1xuICAubG9nbyBpbWcge1xuICAgIGRpc3BsYXk6bm9uZTtcbiAgfVxufVxuIiwiLkhlYWRlciBbZGF0YS1uYy1lbGVtZW50XSB7XG4gIHBhZGRpbmc6IDEwcHggMTBweDtcbn1cbi5IZWFkZXItaW5uZXIge1xuICAtd2Via2l0LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIC1tb3otYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcGFkZGluZy1sZWZ0OiA1MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiA1MHB4O1xufVxuLkhlYWRlci1pbm5lciB7XG4gIC13ZWJraXQtYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgLW1vei1ib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBwYWRkaW5nLWxlZnQ6IDUwcHg7XG4gIHBhZGRpbmctcmlnaHQ6IDUwcHg7XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA5NjBweCkge1xuICAuSGVhZGVyLWlubmVyIHtcbiAgICBwYWRkaW5nLWxlZnQ6IDM4cHg7XG4gICAgcGFkZGluZy1yaWdodDogMzhweDtcbiAgfVxufVxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY4cHgpIHtcbiAgLkhlYWRlci1pbm5lciB7XG4gICAgcGFkZGluZy1sZWZ0OiAyNnB4O1xuICAgIHBhZGRpbmctcmlnaHQ6IDI2cHg7XG4gIH1cbn1cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDY0MHB4KSB7XG4gIC5IZWFkZXItaW5uZXIge1xuICAgIHBhZGRpbmctbGVmdDogMTBweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiAxMHB4O1xuICB9XG59XG4uSGVhZGVyLWlubmVyLS1ib3R0b20ge1xuICBwYWRkaW5nLXRvcDogMjBweDtcbn1cbi5IZWFkZXIuSGVhZGVyLS1ib3R0b20ge1xuICBtaW4taGVpZ2h0OiAxMTJweDtcbn1cbi5IZWFkZXItLWJvdHRvbS5IZWFkZXItLW92ZXJsYXkge1xuICAtd2Via2l0LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIC1tb3otYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xuICB6LWluZGV4OiAxMDAwO1xuICB3aWR0aDogMTAwJTtcbiAgLXdlYmtpdC1mb250LXNtb290aGluZzogYW50aWFsaWFzZWQ7XG4gIC1tb3otb3N4LWZvbnQtc21vb3RoaW5nOiBncmF5c2NhbGU7XG59XG4uSGVhZGVyLW5hdiB7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIGxpbmUtaGVpZ2h0OiAxZW07XG4gIGZvbnQtZmFtaWx5OiBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmO1xuICBmb250LXdlaWdodDogNzAwO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGxldHRlci1zcGFjaW5nOiAwZW07XG4gIGZvbnQtZmFtaWx5OiBwcm94aW1hLW5vdmE7XG4gIGZvbnQtd2VpZ2h0OiA0MDA7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgZm9udC1zaXplOiAxM3B4O1xuICBsZXR0ZXItc3BhY2luZzogMC4xNWVtO1xuICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xufVxuLkhlYWRlci1uYXYtaXRlbSB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgY29sb3I6ICNGRkY7XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDg1MHB4KSB7XG4gIC5IZWFkZXItbmF2LS1wcmltYXJ5IC5IZWFkZXItbmF2LWl0ZW0sXG4gIC5IZWFkZXItbmF2LS1zZWNvbmRhcnkgLkhlYWRlci1uYXYtaXRlbSB7XG4gICAgcGFkZGluZzogMTJweCAxOHB4O1xuICAgIG1hcmdpbjogMC42MThlbSAxZW07XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogODg1cHgpIHtcbiAgLkhlYWRlciAuSGVhZGVyLW5hdiAuSGVhZGVyLW5hdi1pdGVtIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gICAgbWFyZ2luOiAwIDAuNmVtO1xuICB9XG59XG4ubWVudS1zcGFjZXIge1xuICBmbGV4OiAxIDEgYXV0bztcbn1cbi53aGl0ZS1pY29uIHtcbiAgY29sb3I6IHdoaXRlO1xufVxuLm1hdC1tZW51LXBhbmVsLmFwcC1tZW51IHtcbiAgbWluLXdpZHRoOiAxMTJweDtcbiAgbWF4LXdpZHRoOiAxNTJweDtcbiAgb3ZlcmZsb3c6IGF1dG87XG4gIC13ZWJraXQtb3ZlcmZsb3ctc2Nyb2xsaW5nOiB0b3VjaDtcbiAgbWF4LWhlaWdodDogY2FsYygxMDB2aCAtIDQ4cHgpO1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIG91dGxpbmU6IDA7XG59XG4uaG92ZXItZWZmZWN0Lm1hdC1idXR0b246aG92ZXIgLm1hdC1idXR0b24tZm9jdXMtb3ZlcmxheSB7XG4gIG9wYWNpdHk6IDAuMztcbiAgbWluLXdpZHRoOiAxNTJweDtcbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogMTIwMHB4KSB7XG4gIC5sb2dvIGltZyB7XG4gICAgZmxvYXQ6IHJpZ2h0O1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDE1JTtcbiAgICBsZWZ0OiA3NSU7XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNjAxcHgpIGFuZCAobWF4LXdpZHRoOiAxMTk5cHgpIHtcbiAgLmxvZ28gaW1nIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBtYXJnaW4tbGVmdDogYXV0bztcbiAgICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgLmxvZ28gaW1nIHtcbiAgICBmbG9hdDogcmlnaHQ7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMTUlO1xuICAgIGxlZnQ6IDUwJTtcbiAgfVxufVxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNzBweCkge1xuICAubG9nbyBpbWcge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -859,7 +892,7 @@ var ResumeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"item\" id=\"sysAppDiagram\"> --@-- </div>\n</div>\n"
+module.exports = "<main class=\"Index\" data-controller=\"IndexFirstSectionHeight, Parallax, IndexNavigation\">\n  <section id=\"resume-header\" class=\"Index-page Index-page--has-image\"  data-parallax-original-element data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content  vba-alternate-block-style-container\">\n      <h1 align=\"center\">SYSTEM SKILLS</h1>\n    </div>\n  </section>\n  <section *ngIf=\"!isMobile\" id=\"resume-content\" class=\"Index-page\" data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content\">\n      <div class=\"container\">\n        <div class=\"item\" id=\"sysAppDiagram\"></div>\n      </div>\n    </div>\n  </section>\n  <section *ngIf=\"isMobile\" id=\"resume-content\" class=\"Index-page\" data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content \">\n      <div class=\"container\">\n        <carousel>\n          <ng-container *ngFor=\"let item of items;\">\n            <ng-container *carouselItem>\n              <div class=\"item\" id=\"{{item.id}}\"></div>\n            </ng-container>\n          </ng-container>\n        </carousel>\n      </div>\n    </div>\n  </section>\n</main>\n"
 
 /***/ }),
 
@@ -891,6 +924,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_js_Treant_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_js_Treant_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _assets_js_sysDiagram_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../assets/js/sysDiagram.js */ "./src/assets/js/sysDiagram.js");
 /* harmony import */ var _assets_js_sysDiagram_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_js_sysDiagram_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _assets_js_sysDiagramInline_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../assets/js/sysDiagramInline.js */ "./src/assets/js/sysDiagramInline.js");
+/* harmony import */ var _assets_js_sysDiagramInline_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_js_sysDiagramInline_js__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -904,12 +939,53 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var SysDiagramComponent = /** @class */ (function () {
     function SysDiagramComponent() {
+        this.items = [
+            { id: 'sysDiagram' },
+            { id: 'appDiagram' },
+            { id: 'toolsDiagram' },
+        ];
     }
-    SysDiagramComponent.prototype.ngOnInit = function () {
-        new Treant(sys_apps_config);
+    SysDiagramComponent.prototype.ngAfterContentInit = function () {
+        if (window.innerWidth > 980) {
+            this.isMobile = false;
+            setTimeout(function () {
+                new Treant(sys_apps_config);
+            });
+        }
+        else {
+            this.isMobile = true;
+            setTimeout(function () {
+                new Treant(sys_config);
+                new Treant(apps_config);
+                new Treant(tools_config);
+            });
+        }
     };
+    SysDiagramComponent.prototype.onResize = function (event) {
+        if (event.target.innerWidth > 980) {
+            this.isMobile = false;
+            setTimeout(function () {
+                new Treant(sys_apps_config);
+            });
+        }
+        else {
+            this.isMobile = true;
+            setTimeout(function () {
+                new Treant(sys_config);
+                new Treant(apps_config);
+                new Treant(tools_config);
+            });
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"])('window:resize', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], SysDiagramComponent.prototype, "onResize", null);
     SysDiagramComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-sys-diagram',
@@ -3167,14 +3243,14 @@ var dev_config = {
       text: {
               name: 'Dev'
           },
-          HTMLclass: 'light-green',
+          HTMLclass: 'dev-diagram-css',
           children: [
                       {
                           text:{
                               name: 'Frontend'
 
                           },
-                          HTMLclass: 'light-green',
+                          HTMLclass: 'dev-diagram-css',
                           link: {
                               href: 'http://www.google.com'
                           },
@@ -3183,50 +3259,50 @@ var dev_config = {
                                 text:{
                                   name:'HTML/CSS'
                                 },
-                                HTMLclass:'light-green'
+                                HTMLclass:'dev-diagram-css'
                             },
                             {
                               text:{
                                 name:'JavaScript'
                               },
-                              HTMLclass:'light-green',
+                              HTMLclass:'dev-diagram-css',
                               children:[
                                 {
                                   text:{
                                     name:'JQuery'
                                   },
-                                  HTMLclass:'light-green'
+                                  HTMLclass:'dev-diagram-css'
                                 },
                                 {
                                   text:{
                                     name:'Angular ~7/Angular.JS'
                                   },
-                                  HTMLclass:'light-green',
+                                  HTMLclass:'dev-diagram-css',
                                   stackChildren:true,
                                   children:[
                                     {
                                       text:{
                                         name:'jslint'
                                       },
-                                      HTMLclass:'light-green'
+                                      HTMLclass:'dev-diagram-css'
                                     },
                                     {
                                       text:{
                                         name:'karma'
                                       },
-                                      HTMLclass:'light-green'
+                                      HTMLclass:'dev-diagram-css'
                                     },
                                     {
                                       text:{
                                         name:'grunt'
                                       },
-                                      HTMLclass:'light-green'
+                                      HTMLclass:'dev-diagram-css'
                                     },
                                     {
                                       text:{
                                         name:'express'
                                       },
-                                      HTMLclass:'light-green'
+                                      HTMLclass:'dev-diagram-css'
                                     }
                                   ]
                                 }
@@ -3238,39 +3314,39 @@ var dev_config = {
                           text:{
                               name: 'Backend'
                           },
-                          HTMLclass: 'light-green',
+                          HTMLclass: 'dev-diagram-css',
                           children: [
                             {
                                 text:{
                                     name: 'Java J2EE'
                                 },
-                                HTMLclass: 'light-green',
+                                HTMLclass: 'dev-diagram-css',
                                 stackChildren:true,
                                 children: [
                                   {
                                       text:{
                                           name: 'Struts'
                                       },
-                                      HTMLclass: 'light-green'
+                                      HTMLclass: 'dev-diagram-css'
                                   },
                                   {
                                       text:{
                                           name: 'Spring'
                                       },
-                                      HTMLclass: 'light-green',
+                                      HTMLclass: 'dev-diagram-css',
                                       stackChildren:true,
                                       children:[
                                         {
                                             text:{
                                                 name: 'Spring MVC'
                                             },
-                                            HTMLclass: 'light-green'
+                                            HTMLclass: 'dev-diagram-css'
                                         },
                                         {
                                             text:{
                                                 name: 'Spring Security'
                                             },
-                                            HTMLclass: 'light-green'
+                                            HTMLclass: 'dev-diagram-css'
                                         }
                                       ]
                                   },
@@ -3278,7 +3354,7 @@ var dev_config = {
                                       text:{
                                           name: 'Hibernate'
                                       },
-                                      HTMLclass: 'light-green'
+                                      HTMLclass: 'dev-diagram-css'
                                   },
                                 ]
                             }
@@ -3286,6 +3362,144 @@ var dev_config = {
                       }
                   ]
     }
+};
+
+
+/***/ }),
+
+/***/ "./src/assets/js/devDiagramInline.js":
+/*!*******************************************!*\
+  !*** ./src/assets/js/devDiagramInline.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var frontend_config = {
+  chart: {
+    container: '#frontendDiagram',
+    nodeAlign: 'BOTTOM',
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'Frontend'
+    },
+    HTMLclass: 'dev-diagram-css',
+    link: {
+      href: 'http://www.google.com'
+    },
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'HTML/CSS'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'JavaScript'
+        },
+        HTMLclass: 'dev-diagram-css',
+      },
+      {
+        text: {
+          name: 'JQuery'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'Angular ~7/Angular.JS'
+        },
+        HTMLclass: 'dev-diagram-css',
+      },
+      {
+        text: {
+          name: 'jslint'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'karma'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'grunt'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'express'
+        },
+        HTMLclass: 'dev-diagram-css'
+      }
+    ]
+  }
+};
+var backend_config = {
+  chart: {
+    container: '#backendDiagram',
+    nodeAlign: 'BOTTOM',
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'Backend'
+    },
+    HTMLclass: 'dev-diagram-css',
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'Java J2EE'
+        },
+        HTMLclass: 'dev-diagram-css',
+      },
+      {
+        text: {
+          name: 'Struts'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'Spring'
+        },
+        HTMLclass: 'dev-diagram-css',
+      },
+      {
+        text: {
+          name: 'Spring MVC'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'Spring Security'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'Hibernate'
+        },
+        HTMLclass: 'dev-diagram-css'
+      }
+    ]
+  }
 };
 
 
@@ -3315,14 +3529,14 @@ var archi_config = {
       text: {
               name: 'Architecture'
           },
-          HTMLclass: 'accent-color',
+          HTMLclass: 'archi-diagram-css',
           stackChildren:true,
           children: [
                       {
                           text:{
                               name: 'Analyze'
                           },
-                          HTMLclass: 'accent-color',
+                          HTMLclass: 'archi-diagram-css',
                           link: {
                               href: 'http://www.google.com'
                           }
@@ -3331,13 +3545,13 @@ var archi_config = {
                           text:{
                               name: 'Conception'
                           },
-                          HTMLclass: 'accent-color'
+                          HTMLclass: 'archi-diagram-css'
                       },
                       {
                           text:{
                               name: 'Technical Recommandation'
                           },
-                          HTMLclass: 'accent-color'
+                          HTMLclass: 'archi-diagram-css'
                       }
                   ]
     }
@@ -3360,7 +3574,7 @@ var devops_config = {
       text: {
               name: 'DevOps'
           },
-          HTMLclass: 'dark-primary-color',
+          HTMLclass: 'dev-ops-diagram-css',
           stackChildren:true,
           children: [
                       {
@@ -3369,7 +3583,7 @@ var devops_config = {
                               title: 'Setup'
 
                           },
-                          HTMLclass: 'dark-primary-color',
+                          HTMLclass: 'dev-ops-diagram-css',
                           link: {
                               href: 'http://www.google.com'
                           }
@@ -3379,13 +3593,13 @@ var devops_config = {
                               name: 'Standard Development',
                               title: 'Rule Configuration'
                           },
-                          HTMLclass: 'dark-primary-color'
+                          HTMLclass: 'dev-ops-diagram-css'
                       },
                       {
                           text:{
                               name: 'IoC Management'
                           },
-                          HTMLclass: 'dark-primary-color'
+                          HTMLclass: 'dev-ops-diagram-css'
                       }
                   ]
     }
@@ -3408,7 +3622,7 @@ var database_config = {
       text: {
               name: 'DataBase'
           },
-          HTMLclass: 'light-primary-color',
+          HTMLclass: 'database-diagram-css',
           stackChildren:true,
           children: [
                       {
@@ -3416,7 +3630,7 @@ var database_config = {
                               name: 'MySQL'
 
                           },
-                          HTMLclass: 'light-primary-color',
+                          HTMLclass: 'database-diagram-css',
                           link: {
                               href: 'http://www.google.com'
                           }
@@ -3425,49 +3639,49 @@ var database_config = {
                           text:{
                               name: 'PostgreSQL'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'Oracle'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'SQL Server'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'Sybase'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'Derby'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'MongoDB'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'CouchBase'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'NoSQL'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       }
                   ]
     }
@@ -3523,56 +3737,56 @@ var sys_apps_config={
     text:{
       name:'System/Apps'
     },
-    HTMLclass:'deep-purple',
+    HTMLclass:'sys-diagram-css',
     children:[
       {
         text:{
           name:'Systems'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         children:[
           {
             text:{
               name:'Windows'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'UNIX/AIX'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Linux'
             },
-            HTMLclass:'deep-purple',
+            HTMLclass:'sys-diagram-css',
             stackChildren:true,
             children:[
               {
                 text:{
                   name:'Debian'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Ubuntu'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Mint'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Centos'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
             ]
           }
@@ -3582,44 +3796,44 @@ var sys_apps_config={
         text:{
           name:'App server'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         stackChildren:true,
         children:[
           {
             text:{
               name:'Apache'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Tomcat/TomEE'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'WebLogic'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'JBoss'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Nginx'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'NodeJS'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           }
         ]
       },
@@ -3627,44 +3841,225 @@ var sys_apps_config={
         text:{
           name:'Tools'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         stackChildren:true,
         children:[
           {
             text:{
               name:'Eclipse/IntelliJ'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Git/CVS/ClearCase'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'TOAD/SQL Developer'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Microsoft Office Suites'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Jira'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           }
         ]
       }
     ]
   }
 }
+
+
+/***/ }),
+
+/***/ "./src/assets/js/sysDiagramInline.js":
+/*!*******************************************!*\
+  !*** ./src/assets/js/sysDiagramInline.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var sys_config = {
+  chart: {
+    container: '#sysDiagram',
+
+    nodeAlign: 'BOTTOM',
+
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'System'
+    },
+    HTMLclass: 'sys-diagram-css',
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'Windows'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'UNIX/AIX'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Debian'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Ubuntu'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Mint'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Centos'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+    ]
+  }
+};
+
+var apps_config = {
+  chart: {
+    container: '#appDiagram',
+
+    nodeAlign: 'BOTTOM',
+
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'Applications'
+    },
+    HTMLclass: 'sys-diagram-css',
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'Apache'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Tomcat/TomEE'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'WebLogic'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'JBoss'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Nginx'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'NodeJS'
+        },
+        HTMLclass: 'sys-diagram-css'
+      }
+    ]
+  }
+};
+
+var tools_config = {
+  chart: {
+    container: '#toolsDiagram',
+
+    nodeAlign: 'BOTTOM',
+
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'Tools'
+    },
+    HTMLclass: 'sys-diagram-css',
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'Eclipse/IntelliJ'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Git/CVS/ClearCase'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'TOAD/SQL Developer'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Microsoft Office Suites'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Jira'
+        },
+        HTMLclass: 'sys-diagram-css'
+      }
+    ]
+  }
+};
 
 
 /***/ }),

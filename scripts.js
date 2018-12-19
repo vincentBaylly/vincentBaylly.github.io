@@ -15,14 +15,14 @@ var archi_config = {
       text: {
               name: 'Architecture'
           },
-          HTMLclass: 'accent-color',
+          HTMLclass: 'archi-diagram-css',
           stackChildren:true,
           children: [
                       {
                           text:{
                               name: 'Analyze'
                           },
-                          HTMLclass: 'accent-color',
+                          HTMLclass: 'archi-diagram-css',
                           link: {
                               href: 'http://www.google.com'
                           }
@@ -31,13 +31,13 @@ var archi_config = {
                           text:{
                               name: 'Conception'
                           },
-                          HTMLclass: 'accent-color'
+                          HTMLclass: 'archi-diagram-css'
                       },
                       {
                           text:{
                               name: 'Technical Recommandation'
                           },
-                          HTMLclass: 'accent-color'
+                          HTMLclass: 'archi-diagram-css'
                       }
                   ]
     }
@@ -60,7 +60,7 @@ var devops_config = {
       text: {
               name: 'DevOps'
           },
-          HTMLclass: 'dark-primary-color',
+          HTMLclass: 'dev-ops-diagram-css',
           stackChildren:true,
           children: [
                       {
@@ -69,7 +69,7 @@ var devops_config = {
                               title: 'Setup'
 
                           },
-                          HTMLclass: 'dark-primary-color',
+                          HTMLclass: 'dev-ops-diagram-css',
                           link: {
                               href: 'http://www.google.com'
                           }
@@ -79,13 +79,13 @@ var devops_config = {
                               name: 'Standard Development',
                               title: 'Rule Configuration'
                           },
-                          HTMLclass: 'dark-primary-color'
+                          HTMLclass: 'dev-ops-diagram-css'
                       },
                       {
                           text:{
                               name: 'IoC Management'
                           },
-                          HTMLclass: 'dark-primary-color'
+                          HTMLclass: 'dev-ops-diagram-css'
                       }
                   ]
     }
@@ -108,7 +108,7 @@ var database_config = {
       text: {
               name: 'DataBase'
           },
-          HTMLclass: 'light-primary-color',
+          HTMLclass: 'database-diagram-css',
           stackChildren:true,
           children: [
                       {
@@ -116,7 +116,7 @@ var database_config = {
                               name: 'MySQL'
 
                           },
-                          HTMLclass: 'light-primary-color',
+                          HTMLclass: 'database-diagram-css',
                           link: {
                               href: 'http://www.google.com'
                           }
@@ -125,49 +125,49 @@ var database_config = {
                           text:{
                               name: 'PostgreSQL'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'Oracle'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'SQL Server'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'Sybase'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'Derby'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'MongoDB'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'CouchBase'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       },
                       {
                           text:{
                               name: 'NoSQL'
                           },
-                          HTMLclass: 'light-primary-color'
+                          HTMLclass: 'database-diagram-css'
                       }
                   ]
     }
@@ -2372,14 +2372,14 @@ break;case"opacity":k.gradient&&!k[b]("stroke-opacity")&&q(i,{"stroke-opacity":p
       text: {
               name: 'Dev'
           },
-          HTMLclass: 'light-green',
+          HTMLclass: 'dev-diagram-css',
           children: [
                       {
                           text:{
                               name: 'Frontend'
 
                           },
-                          HTMLclass: 'light-green',
+                          HTMLclass: 'dev-diagram-css',
                           link: {
                               href: 'http://www.google.com'
                           },
@@ -2388,50 +2388,50 @@ break;case"opacity":k.gradient&&!k[b]("stroke-opacity")&&q(i,{"stroke-opacity":p
                                 text:{
                                   name:'HTML/CSS'
                                 },
-                                HTMLclass:'light-green'
+                                HTMLclass:'dev-diagram-css'
                             },
                             {
                               text:{
                                 name:'JavaScript'
                               },
-                              HTMLclass:'light-green',
+                              HTMLclass:'dev-diagram-css',
                               children:[
                                 {
                                   text:{
                                     name:'JQuery'
                                   },
-                                  HTMLclass:'light-green'
+                                  HTMLclass:'dev-diagram-css'
                                 },
                                 {
                                   text:{
                                     name:'Angular ~7/Angular.JS'
                                   },
-                                  HTMLclass:'light-green',
+                                  HTMLclass:'dev-diagram-css',
                                   stackChildren:true,
                                   children:[
                                     {
                                       text:{
                                         name:'jslint'
                                       },
-                                      HTMLclass:'light-green'
+                                      HTMLclass:'dev-diagram-css'
                                     },
                                     {
                                       text:{
                                         name:'karma'
                                       },
-                                      HTMLclass:'light-green'
+                                      HTMLclass:'dev-diagram-css'
                                     },
                                     {
                                       text:{
                                         name:'grunt'
                                       },
-                                      HTMLclass:'light-green'
+                                      HTMLclass:'dev-diagram-css'
                                     },
                                     {
                                       text:{
                                         name:'express'
                                       },
-                                      HTMLclass:'light-green'
+                                      HTMLclass:'dev-diagram-css'
                                     }
                                   ]
                                 }
@@ -2443,39 +2443,39 @@ break;case"opacity":k.gradient&&!k[b]("stroke-opacity")&&q(i,{"stroke-opacity":p
                           text:{
                               name: 'Backend'
                           },
-                          HTMLclass: 'light-green',
+                          HTMLclass: 'dev-diagram-css',
                           children: [
                             {
                                 text:{
                                     name: 'Java J2EE'
                                 },
-                                HTMLclass: 'light-green',
+                                HTMLclass: 'dev-diagram-css',
                                 stackChildren:true,
                                 children: [
                                   {
                                       text:{
                                           name: 'Struts'
                                       },
-                                      HTMLclass: 'light-green'
+                                      HTMLclass: 'dev-diagram-css'
                                   },
                                   {
                                       text:{
                                           name: 'Spring'
                                       },
-                                      HTMLclass: 'light-green',
+                                      HTMLclass: 'dev-diagram-css',
                                       stackChildren:true,
                                       children:[
                                         {
                                             text:{
                                                 name: 'Spring MVC'
                                             },
-                                            HTMLclass: 'light-green'
+                                            HTMLclass: 'dev-diagram-css'
                                         },
                                         {
                                             text:{
                                                 name: 'Spring Security'
                                             },
-                                            HTMLclass: 'light-green'
+                                            HTMLclass: 'dev-diagram-css'
                                         }
                                       ]
                                   },
@@ -2483,7 +2483,7 @@ break;case"opacity":k.gradient&&!k[b]("stroke-opacity")&&q(i,{"stroke-opacity":p
                                       text:{
                                           name: 'Hibernate'
                                       },
-                                      HTMLclass: 'light-green'
+                                      HTMLclass: 'dev-diagram-css'
                                   },
                                 ]
                             }
@@ -2491,6 +2491,134 @@ break;case"opacity":k.gradient&&!k[b]("stroke-opacity")&&q(i,{"stroke-opacity":p
                       }
                   ]
     }
+};
+
+;var frontend_config = {
+  chart: {
+    container: '#frontendDiagram',
+    nodeAlign: 'BOTTOM',
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'Frontend'
+    },
+    HTMLclass: 'dev-diagram-css',
+    link: {
+      href: 'http://www.google.com'
+    },
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'HTML/CSS'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'JavaScript'
+        },
+        HTMLclass: 'dev-diagram-css',
+      },
+      {
+        text: {
+          name: 'JQuery'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'Angular ~7/Angular.JS'
+        },
+        HTMLclass: 'dev-diagram-css',
+      },
+      {
+        text: {
+          name: 'jslint'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'karma'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'grunt'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'express'
+        },
+        HTMLclass: 'dev-diagram-css'
+      }
+    ]
+  }
+};
+var backend_config = {
+  chart: {
+    container: '#backendDiagram',
+    nodeAlign: 'BOTTOM',
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'Backend'
+    },
+    HTMLclass: 'dev-diagram-css',
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'Java J2EE'
+        },
+        HTMLclass: 'dev-diagram-css',
+      },
+      {
+        text: {
+          name: 'Struts'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'Spring'
+        },
+        HTMLclass: 'dev-diagram-css',
+      },
+      {
+        text: {
+          name: 'Spring MVC'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'Spring Security'
+        },
+        HTMLclass: 'dev-diagram-css'
+      },
+      {
+        text: {
+          name: 'Hibernate'
+        },
+        HTMLclass: 'dev-diagram-css'
+      }
+    ]
+  }
 };
 
 ;var sys_apps_config={
@@ -2510,56 +2638,56 @@ break;case"opacity":k.gradient&&!k[b]("stroke-opacity")&&q(i,{"stroke-opacity":p
     text:{
       name:'System/Apps'
     },
-    HTMLclass:'deep-purple',
+    HTMLclass:'sys-diagram-css',
     children:[
       {
         text:{
           name:'Systems'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         children:[
           {
             text:{
               name:'Windows'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'UNIX/AIX'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Linux'
             },
-            HTMLclass:'deep-purple',
+            HTMLclass:'sys-diagram-css',
             stackChildren:true,
             children:[
               {
                 text:{
                   name:'Debian'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Ubuntu'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Mint'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Centos'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
             ]
           }
@@ -2569,44 +2697,44 @@ break;case"opacity":k.gradient&&!k[b]("stroke-opacity")&&q(i,{"stroke-opacity":p
         text:{
           name:'App server'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         stackChildren:true,
         children:[
           {
             text:{
               name:'Apache'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Tomcat/TomEE'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'WebLogic'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'JBoss'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Nginx'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'NodeJS'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           }
         ]
       },
@@ -2614,44 +2742,215 @@ break;case"opacity":k.gradient&&!k[b]("stroke-opacity")&&q(i,{"stroke-opacity":p
         text:{
           name:'Tools'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         stackChildren:true,
         children:[
           {
             text:{
               name:'Eclipse/IntelliJ'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Git/CVS/ClearCase'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'TOAD/SQL Developer'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Microsoft Office Suites'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Jira'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           }
         ]
       }
     ]
   }
 }
+
+;var sys_config = {
+  chart: {
+    container: '#sysDiagram',
+
+    nodeAlign: 'BOTTOM',
+
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'System'
+    },
+    HTMLclass: 'sys-diagram-css',
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'Windows'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'UNIX/AIX'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Debian'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Ubuntu'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Mint'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Centos'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+    ]
+  }
+};
+
+var apps_config = {
+  chart: {
+    container: '#appDiagram',
+
+    nodeAlign: 'BOTTOM',
+
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'Applications'
+    },
+    HTMLclass: 'sys-diagram-css',
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'Apache'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Tomcat/TomEE'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'WebLogic'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'JBoss'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Nginx'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'NodeJS'
+        },
+        HTMLclass: 'sys-diagram-css'
+      }
+    ]
+  }
+};
+
+var tools_config = {
+  chart: {
+    container: '#toolsDiagram',
+
+    nodeAlign: 'BOTTOM',
+
+    connectors: {
+      type: 'step'
+    },
+    node: {
+      HTMLclass: 'node1'
+    }
+  },
+  nodeStructure: {
+    text: {
+      name: 'Tools'
+    },
+    HTMLclass: 'sys-diagram-css',
+    stackChildren: true,
+    children: [{
+        text: {
+          name: 'Eclipse/IntelliJ'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Git/CVS/ClearCase'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'TOAD/SQL Developer'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Microsoft Office Suites'
+        },
+        HTMLclass: 'sys-diagram-css'
+      },
+      {
+        text: {
+          name: 'Jira'
+        },
+        HTMLclass: 'sys-diagram-css'
+      }
+    ]
+  }
+};
 
 ;
 //# sourceMappingURL=scripts.js.map

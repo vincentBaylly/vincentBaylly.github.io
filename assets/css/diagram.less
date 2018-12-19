@@ -1,0 +1,129 @@
+.Treant { position: relative; overflow: hidden; padding: 0 !important; }
+.Treant > .node,
+.Treant > .pseudo { position: absolute; display: block; }
+.Treant.loaded .node,
+.Treant.loaded .pseudo { visibility: visible; }
+.Treant > .pseudo { width: 0; height: 0; border: none; padding: 0; }
+.Treant .collapse-switch { width: 3px; height: 3px; display: block; border: 1px solid black; position: absolute; top: 1px; right: 1px; cursor: pointer; }
+.Treant .collapsed .collapse-switch { background-color: #868DEE; }
+.Treant > .node img {	border: none; float: left; }
+
+.Treant > .node {  }
+.Treant > p {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+}
+.node-name {
+  font-weight: bold;
+}
+
+.node1 {
+    padding: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: 1px solid #000;
+    width: 100px;
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+.item {
+  padding: 0;
+  display: flex;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  margin: 2em
+}
+.slide-button{
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+/*diagram style*/
+.archi-diagram-css{
+  &:extend(.grey);
+  text-align: center;
+}
+
+.dev-ops-diagram-css{
+  &:extend(.silver);
+  text-align: center;
+}
+
+.database-diagram-css{
+  &:extend(.zambezi);
+  text-align: center;
+}
+
+.dev-diagram-css{
+  &:extend(.outrageous-orange);
+  text-align: center;
+}
+
+.sys-diagram-css{
+  &:extend(.deep-purple);
+  text-align: center;
+}
+
+/* Color */
+.grey {
+    background-color: #808080;
+}
+
+.silver {
+    background-color: #C0C0C0;
+    color: #757575;
+}
+
+.zambezi {
+    background-color: #585858;
+}
+
+.blue {
+    background-color: #191970;
+}
+
+.red {
+    background-color: #D32F2F;
+}
+
+.outrageous-orange {
+    background-color: #FF5722;
+}
+
+.we-peep {
+    background-color: #FFCDD2;
+    color: #757575;
+}
+
+.bright-red {
+    background-color: #F44336;
+}
+
+.white {
+    background-color: #FFFFFF;
+}
+
+.nero {
+    background-color: #212121;
+}
+
+.gray {
+    background-color: #BDBDBD;
+}
+
+.green{
+  background-color: #8BC34A;
+}
+
+.deep-purple{
+    background-color: #673AB7;
+}

@@ -15,56 +15,56 @@ var sys_apps_config={
     text:{
       name:'System/Apps'
     },
-    HTMLclass:'deep-purple',
+    HTMLclass:'sys-diagram-css',
     children:[
       {
         text:{
           name:'Systems'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         children:[
           {
             text:{
               name:'Windows'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'UNIX/AIX'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Linux'
             },
-            HTMLclass:'deep-purple',
+            HTMLclass:'sys-diagram-css',
             stackChildren:true,
             children:[
               {
                 text:{
                   name:'Debian'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Ubuntu'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Mint'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
               {
                 text:{
                   name:'Centos'
                 },
-                HTMLclass:'deep-purple'
+                HTMLclass:'sys-diagram-css'
               },
             ]
           }
@@ -74,44 +74,44 @@ var sys_apps_config={
         text:{
           name:'App server'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         stackChildren:true,
         children:[
           {
             text:{
               name:'Apache'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Tomcat/TomEE'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'WebLogic'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'JBoss'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Nginx'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'NodeJS'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           }
         ]
       },
@@ -119,38 +119,38 @@ var sys_apps_config={
         text:{
           name:'Tools'
         },
-        HTMLclass:'deep-purple',
+        HTMLclass:'sys-diagram-css',
         stackChildren:true,
         children:[
           {
             text:{
               name:'Eclipse/IntelliJ'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Git/CVS/ClearCase'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'TOAD/SQL Developer'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Microsoft Office Suites'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           },
           {
             text:{
               name:'Jira'
             },
-            HTMLclass:'deep-purple'
+            HTMLclass:'sys-diagram-css'
           }
         ]
       }
