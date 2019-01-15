@@ -1,5 +1,694 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
 
+/***/ "./dist/google-maps-module/fesm5/google-maps-module.js":
+/*!*************************************************************!*\
+  !*** ./dist/google-maps-module/fesm5/google-maps-module.js ***!
+  \*************************************************************/
+/*! exports provided: GoogleApiService, GoogleMapsComponent, GoogleMapsModule, ɵa */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleApiService", function() { return GoogleApiService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleMapsComponent", function() { return GoogleMapsComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleMapsModule", function() { return GoogleMapsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return MessageService; });
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+
+
+
+
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var MessageService = /** @class */ (function () {
+    function MessageService() {
+        this.messages = [];
+    }
+    /**
+     * @param {?} message
+     * @return {?}
+     */
+    MessageService.prototype.add = /**
+     * @param {?} message
+     * @return {?}
+     */
+    function (message) {
+        this.messages.push(message);
+    };
+    /**
+     * @return {?}
+     */
+    MessageService.prototype.clear = /**
+     * @return {?}
+     */
+    function () {
+        this.messages = [];
+    };
+    MessageService.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"], args: [{ providedIn: 'root' },] }
+    ];
+    /** @nocollapse */ MessageService.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["defineInjectable"])({ factory: function MessageService_Factory() { return new MessageService(); }, token: MessageService, providedIn: "root" });
+    return MessageService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var API_KEY = 'AIzaSyCSJ4lLjYEbl1a1F-ynTrdY3BwIkvHAklc';
+/** @type {?} */
+var url = 'https://maps.googleapis.com/maps/api/js?key=' + API_KEY + '&callback=initMap';
+/** @type {?} */
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpHeaders"]({
+        'Content-Type': 'application/json'
+    })
+};
+var GoogleApiService = /** @class */ (function () {
+    function GoogleApiService(http, messageService) {
+        var _this = this;
+        this.http = http;
+        this.messageService = messageService;
+        this.listingsUrl = 'http://localhost:3000/featured-homes'; // URL to web api
+        this.loadMap = new Promise(function (resolve) {
+            window['initMap'] = function () {
+                resolve();
+            };
+            _this.loadScript();
+        });
+    }
+    /**
+     * @return {?}
+     */
+    GoogleApiService.prototype.initMap = /**
+     * @return {?}
+     */
+    function () {
+        return this.loadMap;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    GoogleApiService.prototype.loadScript = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var script = document.createElement('script');
+        script.src = url;
+        script.type = 'text/javascript';
+        if (document.body.contains(script)) {
+            return;
+        }
+        document.getElementsByTagName('head')[0].appendChild(script);
+    };
+    /**
+     * @return {?}
+     */
+    GoogleApiService.prototype.findFeaturedHomes = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.http.get(this.listingsUrl + "/?regions%5B%5D=4&subtype%5B%5D=4&is_for_sale=1&with_builders=1&parent=1&sort=-published_at&page%5Bnumber%5D=1&province=qc&page%5Bsize%5D=11&include=builders", httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["tap"])(function (_) { return _this.log("found houses matching regions%5B%5D=4&subtype%5B%5D=4&is_for_sale=1&with_builders=1&parent=1&sort=-published_at&page%5Bnumber%5D=1&province=qc&page%5Bsize%5D=11&include=builders"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["catchError"])(this.handleError('findFeaturedHomes')));
+    };
+    /**
+     * Handle Http operation that failed.
+     * Let the app continue.
+     * @param operation - name of the operation that failed
+     * @param result - optional value to return as the observable result
+     */
+    /**
+     * Handle Http operation that failed.
+     * Let the app continue.
+     * @private
+     * @template T
+     * @param {?=} operation - name of the operation that failed
+     * @param {?=} result - optional value to return as the observable result
+     * @return {?}
+     */
+    GoogleApiService.prototype.handleError = /**
+     * Handle Http operation that failed.
+     * Let the app continue.
+     * @private
+     * @template T
+     * @param {?=} operation - name of the operation that failed
+     * @param {?=} result - optional value to return as the observable result
+     * @return {?}
+     */
+    function (operation, result) {
+        var _this = this;
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+            // TODO: better job of transforming error for user consumption
+            _this.log(operation + " failed: " + error.message);
+            // Let the app keep running by returning an empty result.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["of"])((/** @type {?} */ (result)));
+        };
+    };
+    /** Log a HeroService message with the MessageService */
+    /**
+     * Log a HeroService message with the MessageService
+     * @private
+     * @param {?} message
+     * @return {?}
+     */
+    GoogleApiService.prototype.log = /**
+     * Log a HeroService message with the MessageService
+     * @private
+     * @param {?} message
+     * @return {?}
+     */
+    function (message) {
+        this.messageService.add("GoogleApiService: " + message);
+    };
+    GoogleApiService.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"], args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    GoogleApiService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] },
+        { type: MessageService }
+    ]; };
+    /** @nocollapse */ GoogleApiService.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["defineInjectable"])({ factory: function GoogleApiService_Factory() { return new GoogleApiService(Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["inject"])(_angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]), Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["inject"])(MessageService)); }, token: GoogleApiService, providedIn: "root" });
+    return GoogleApiService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var markerHouseImg = "assets/img/house.png";
+/** @type {?} */
+var markerCityImg = "assets/img/smallcity.png";
+/** @type {?} */
+var markers_declared = [
+    {
+        latitude: 46.6123225,
+        longitude: -72.7156227,
+        title: "Grand-Mere"
+    },
+    {
+        latitude: 46.6655206,
+        longitude: -72.6249238,
+        title: "Herouxville"
+    },
+    {
+        latitude: 46.6218409,
+        longitude: -72.628147,
+        title: "Lac-a-la-Tortue"
+    },
+    {
+        latitude: 46.4902378,
+        longitude: -72.6663659,
+        title: "Notre-Dame-du-Mont-Carmel"
+    },
+    {
+        latitude: 46.3953949,
+        longitude: -72.8795198,
+        title: "Saint-Barnabe"
+    },
+    {
+        latitude: 46.4987642,
+        longitude: -72.8265911,
+        title: "Saint-Boniface-de-Shawinigan"
+    },
+    {
+        latitude: 46.4881512,
+        longitude: -72.9623064,
+        title: "Saint-Elie-de-Caxton",
+    },
+    {
+        latitude: 46.4299709,
+        longitude: -72.7780498,
+        title: "Saint-Etienne-des-Gres"
+    },
+    {
+        latitude: 46.5975099,
+        longitude: -72.8245392,
+        title: "Saint-Gerard-des-Laurentides"
+    },
+    {
+        latitude: 46.5736319,
+        longitude: -72.9297378,
+        title: "Saint-Mathieu-du-Parc"
+    },
+    {
+        latitude: 46.4714846,
+        longitude: -72.5377148,
+        title: "Saint-Maurice"
+    },
+    {
+        latitude: 46.5633829,
+        longitude: -72.4820078,
+        title: "Saint-Narcisse"
+    },
+    {
+        latitude: 46.418214,
+        longitude: -73.0198445,
+        title: "Saint-Paulin"
+    },
+    {
+        latitude: 46.518729,
+        longitude: -72.7435557,
+        title: "Shawinigan-Sud"
+    },
+    {
+        latitude: 46.5618296,
+        longitude: -72.74353,
+        title: "Shawinigan"
+    },
+    {
+        latitude: 46.3426025,
+        longitude: -72.562119,
+        title: "Trois-Rivieres"
+    },
+    {
+        latitude: 46.2809623,
+        longitude: -72.8349377,
+        title: "Yamachiche"
+    }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var GoogleMapsComponent = /** @class */ (function () {
+    function GoogleMapsComponent(googleApi) {
+        this.googleApi = googleApi;
+        /**
+         * the icon that defines the icon to add and remove city list
+         */
+        this.icon = 'add';
+        /**
+         * the status that defines the state of the city list
+         */
+        this.status = false;
+        /**
+         * the display that defines the state of the houses
+         */
+        this.display = false;
+        /**
+         * The height that defines the size of the map
+         */
+        this.height = '500px';
+        /**
+         * The longitude that defines the center of the map.
+         */
+        this.longitude = 0;
+        /**
+         * The latitude that defines the center of the map.
+         */
+        this.latitude = 0;
+        /**
+         * the markers house that defines all the house markers added to the map
+         */
+        this.markers_house = [];
+        /**
+         * the houses that defines the tab of the houses get from the duProprio service call
+         */
+        this.houses = [];
+        /**
+         * the markers city that defines the city markers added to the map
+         */
+        this.markers_city = [];
+    }
+    /**
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.googleApi.initMap().then(function () {
+            _this.info_window = new google.maps.InfoWindow();
+            /** @type {?} */
+            var latlng = new google.maps.LatLng(_this.latitude, _this.longitude);
+            _this.map = new google.maps.Map(document.getElementById('map'), {
+                mapTypeControl: false,
+                center: latlng,
+                zoom: 9
+            });
+            /** @type {?} */
+            var container = document.getElementById("container");
+            /** @type {?} */
+            var citylist = document.getElementById("citylist");
+            /** @type {?} */
+            var center = document.getElementById("center");
+            /** @type {?} */
+            var option = document.getElementById("option");
+            _this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(container);
+            _this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(citylist);
+            _this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(center);
+            _this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(option);
+            _this.loadDeclaredMarkers();
+        });
+        this.findFeaturedHomes();
+    };
+    /**
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.findFeaturedHomes = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.googleApi.findFeaturedHomes()
+            .subscribe(function (listing) {
+            var _loop_1 = function () {
+                /** @type {?} */
+                var house = listing.listings[i];
+                house.marker = {
+                    lat: 0,
+                    lng: 0,
+                    draggable: false
+                };
+                /** @type {?} */
+                var full_address = _this.getFullAddress(house.address);
+                if (full_address) {
+                    _this.findLocation(house, full_address, function (house) {
+                        /** @type {?} */
+                        var latlng = new google.maps.LatLng(house.lat, house.lng);
+                        /** @type {?} */
+                        var marker = new google.maps.Marker({
+                            position: latlng,
+                            map: _this.map,
+                            title: house.id + ' ' + full_address,
+                            icon: markerHouseImg
+                        });
+                        google.maps.event.addListener(marker, "click", (_this.loadInfoWindow)(_this.info_window, _this.houses, marker, _this.getFullAddress));
+                        _this.markers_house.push(marker);
+                    });
+                }
+            };
+            for (var i = 0; i < listing.listings.length; i++) {
+                _loop_1();
+            }
+        });
+    };
+    /**
+     * @param {?} house
+     * @param {?} address
+     * @param {?} addToolTips
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.findLocation = /**
+     * @param {?} house
+     * @param {?} address
+     * @param {?} addToolTips
+     * @return {?}
+     */
+    function (house, address, addToolTips) {
+        var _this = this;
+        if (!this.geocoder)
+            this.geocoder = new google.maps.Geocoder();
+        this.geocoder.geocode({
+            'address': address
+        }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0].geometry.location) {
+                    house.lat = results[0].geometry.location.lat();
+                    house.lng = results[0].geometry.location.lng();
+                    house.marker.lat = results[0].geometry.location.lat();
+                    house.marker.lng = results[0].geometry.location.lng();
+                    house.marker.draggable = true;
+                    house.viewport = results[0].geometry.viewport;
+                }
+                addToolTips(house);
+            }
+            else {
+                console.warn('The address: ' + address + ' as not be found');
+            }
+            _this.houses.push(house);
+        });
+    };
+    /**
+     * @param {?} info_window
+     * @param {?} houses
+     * @param {?} marker
+     * @param {?} getFullAddress
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.loadInfoWindow = /**
+     * @param {?} info_window
+     * @param {?} houses
+     * @param {?} marker
+     * @param {?} getFullAddress
+     * @return {?}
+     */
+    function (info_window, houses, marker, getFullAddress) {
+        return function (evt) {
+            for (var i = 0; i < houses.length; i++) {
+                if (marker.title.includes(houses[i].id)) {
+                    /** @type {?} */
+                    var full_address = getFullAddress(houses[i].address);
+                    /** @type {?} */
+                    var contentString = '<div id="content">' +
+                        '<img style="height: 150px;" src="' + houses[i].photo + '">' +
+                        '<h1 id="firstHeading" class="firstHeading">' + houses[i].address.city + '</h1>' +
+                        '<div id="bodyContent">' +
+                        '<p>Prix: ' + houses[i].price.display + '</p>' +
+                        '<p>Adresse: <a target="blank" href="https://duproprio.com' + houses[i].url + '">' +
+                        full_address + '</a></p>' +
+                        '</div>' +
+                        '</div>';
+                    this.map.setCenter(marker.getPosition());
+                    this.map.setZoom(12);
+                    info_window.close();
+                    info_window.setContent(contentString);
+                    info_window.open(this.map, marker);
+                    break;
+                }
+            }
+        };
+    };
+    /**
+     * @param {?} address
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.getFullAddress = /**
+     * @param {?} address
+     * @return {?}
+     */
+    function (address) {
+        /** @type {?} */
+        var full_address = address.street || "";
+        if (address.city)
+            full_address = full_address + " " + address.city;
+        if (address.province)
+            full_address = full_address + " " + address.province;
+        return full_address;
+    };
+    /**
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.setCenter = /**
+     * @return {?}
+     */
+    function () {
+        this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+        this.map.setZoom(9);
+        this.info_window.close();
+    };
+    /**
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.addCity = /**
+     * @return {?}
+     */
+    function () {
+        if (this.markers_city.length > 0) {
+            if (this.markers_city[0].getMap() === undefined || this.markers_city[0].getMap() == null) {
+                for (var index = 0; index < this.markers_city.length; index++) {
+                    this.markers_city[index].setMap(this.map);
+                }
+                document.getElementById("addcity").innerHTML = "Supprimer Ville";
+            }
+            else {
+                this.removeCity();
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.removeCity = /**
+     * @return {?}
+     */
+    function () {
+        for (var index = 0; index < this.markers_city.length; index++) {
+            this.markers_city[index].setMap(null);
+        }
+        document.getElementById("addcity").innerHTML = "Ajouter Ville";
+        this.info_window.close();
+    };
+    /**
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.showHouses = /**
+     * @return {?}
+     */
+    function () {
+        if (this.markers_house.length > 0) {
+            if (this.markers_house[0].getMap() === undefined || this.markers_house[0].getMap() === null) {
+                for (var index = 0; index < this.markers_house.length; index++) {
+                    this.markers_house[index].setMap(this.map);
+                }
+                this.display = false;
+            }
+            else {
+                for (var index = 0; index < this.markers_house.length; index++) {
+                    this.markers_house[index].setMap(null);
+                }
+                this.display = true;
+                this.info_window.close();
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.loadDeclaredMarkers = /**
+     * @return {?}
+     */
+    function () {
+        for (var index = 0; index < markers_declared.length; index++) {
+            /** @type {?} */
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(markers_declared[index].latitude, markers_declared[index].longitude),
+                title: markers_declared[index].title,
+                icon: markerCityImg
+            });
+            this.markers_city.push(marker);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.openCityList = /**
+     * @return {?}
+     */
+    function () {
+        this.status = !this.status;
+        this.icon = this.status ? 'remove' : 'add';
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    GoogleMapsComponent.prototype.cityCenter = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        /** @type {?} */
+        var target = event.target || event.srcElement || event.currentTarget;
+        /** @type {?} */
+        var idAttr = target.attributes.id;
+        /** @type {?} */
+        var marker = idAttr.nodeValue;
+        console.log(marker);
+        for (var index = 0; index < this.markers_city.length; index++) {
+            if (marker === this.markers_city[index].getTitle()) {
+                this.markers_city[index].setMap(this.map);
+                this.map.setCenter(this.markers_city[index].getPosition());
+                this.info_window.close();
+                this.info_window.setContent(this.markers_city[index].title);
+                this.info_window.open(this.map, this.markers_city[index]);
+                this.map.setZoom(12);
+            }
+            else {
+                this.markers_city[index].setMap(null);
+            }
+        }
+    };
+    GoogleMapsComponent.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"], args: [{
+                    selector: 'google-maps',
+                    template: "<div id=\"map\" [style.height]=\"height\"></div>\n<div class=\"container\" id=\"container\">\n    <div class=\"header\" id=\"header\" (click)=\"openCityList()\">\n      <mat-icon class=\"white-icon\">{{icon}}</mat-icon>\n    </div>\n</div>\n<div id=\"citylist\" [ngClass]=\"status ? 'showcity' : 'hidecity'\">\n    <p id=\"cityName\">\n        <a class=\"addcity\" id=\"addcity\" (click)=\"addCity()\" data-marker=\"addcity\">Ajouter Ville</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Grand-Mere\">Grand-Mere</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Herouxville\">Herouxville</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Lac-a-la-Tortue\">Lac-a-la-Tortue</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Notre-Dame-du-Mont-Carmel\">Notre-Dame-du-Mont-Carmel</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Barnabe\">Saint-Barnabe</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Boniface-de-Shawinigan\">Saint-Boniface-de-Shawinigan</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Elie-de-Caxton\">Saint-Elie-de-Caxton</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Etienne-des-Gres\">Saint-Etienne-des-Gres</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Gerard-des-Laurentides\">Saint-Gerard-des-Laurentides</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Mathieu-du-Parc\">Saint-Mathieu-du-Parc</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Maurice\">Saint-Maurice</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Narcisse\">Saint-Narcisse</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Saint-Paulin\">Saint-Paulin</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Shawinigan-Sud\">Shawinigan-Sud</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Shawinigan\">Shawinigan</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Trois-Rivieres\">Trois-Rivieres</a><br/>\n        <a class=\"location\" (click)=\"cityCenter($event)\" id=\"Yamachiche\">Yamachiche</a>\n    </p>\n</div>\n<div class=\"center\" id=\"center\" (click)=\"setCenter()\">\n  <mat-icon class=\"white-icon content\">center_focus_strong</mat-icon>\n</div>\n<div class=\"option\" id=\"option\">\n    <div title=\"Afficher Maison\" (click)=\"showHouses()\" class=\"houses\" id=\"houses\">\n        <mat-icon [ngClass]=\"display ? 'white-icon' : 'grey-icon'\">home</mat-icon>\n    </div>\n</div>\n",
+                    providers: [GoogleApiService],
+                    styles: ["body,html{height:100%;margin:0;padding:0}#map{height:100%}#cityName{margin-bottom:0}a{text-decoration:none;color:#000;cursor:pointer}.container{background:#fff;-webkit-user-select:none;border:0;padding:0;margin:2% 0 0 2%;position:absolute;cursor:pointer;border-radius:2px;height:40px;width:40px;top:60px;right:0}.hidecity{display:none}.showcity{display:block;padding:1px;background:#fff;border-radius:2px;cursor:pointer;top:14%!important;left:2%!important;position:-webkit-sticky!important;position:sticky!important;height:250px;width:200px}.container .header{height:18px;width:18px;display:block;position:absolute;left:20%;top:20%}.option{background:#fff;border:0;margin:10px;padding:0;position:absolute;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border-radius:2px;height:40px;width:40px;box-shadow:rgba(0,0,0,.3) 0 1px 4px -1px;overflow:hidden;top:73px;right:0}.houses{height:18px;width:18px;display:block;position:absolute;left:20%;top:20%}.center{background:#fff;border:0;padding:0;margin:2% 0 0;position:absolute;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border-radius:2px;height:40px;width:40px;box-shadow:rgba(0,0,0,.3) 0 1px 4px -1px;overflow:hidden;top:60px;right:0p}.center .content{height:18px;width:18px;display:block;position:absolute;left:20%;top:20%}.white-icon{color:#000}.grey-icon{color:grey}"]
+                }] }
+    ];
+    /** @nocollapse */
+    GoogleMapsComponent.ctorParameters = function () { return [
+        { type: GoogleApiService }
+    ]; };
+    GoogleMapsComponent.propDecorators = {
+        icon: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"] }],
+        status: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"] }],
+        display: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"] }],
+        height: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"] }],
+        longitude: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
+        latitude: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }]
+    };
+    return GoogleMapsComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var GoogleMapsModule = /** @class */ (function () {
+    function GoogleMapsModule() {
+    }
+    GoogleMapsModule.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"], args: [{
+                    declarations: [
+                        GoogleMapsComponent
+                    ],
+                    imports: [
+                        _angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"],
+                        _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatIconModule"],
+                        _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"],
+                        _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"]
+                    ],
+                    exports: [
+                        GoogleMapsComponent
+                    ]
+                },] }
+    ];
+    return GoogleMapsModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+
+
+//# sourceMappingURL=google-maps-module.js.map
+
+/***/ }),
+
 /***/ "./src/$$_lazy_route_resource lazy recursive":
 /*!**********************************************************!*\
   !*** ./src/$$_lazy_route_resource lazy namespace object ***!
@@ -42,12 +731,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_resume_resume_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/resume/resume.component */ "./src/app/components/resume/resume.component.ts");
 /* harmony import */ var _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/contact/contact.component */ "./src/app/components/contact/contact.component.ts");
 /* harmony import */ var _components_license_license_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/license/license.component */ "./src/app/components/license/license.component.ts");
+/* harmony import */ var _components_housing_housing_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/housing/housing.component */ "./src/app/components/housing/housing.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -65,7 +756,8 @@ var routes = [
     { path: 'devdiagram', component: _components_dev_diagram_dev_diagram_component__WEBPACK_IMPORTED_MODULE_5__["DevDiagramComponent"] },
     { path: 'sysdiagram', component: _components_sys_diagram_sys_diagram_component__WEBPACK_IMPORTED_MODULE_4__["SysDiagramComponent"] },
     { path: 'contact', component: _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_7__["ContactComponent"] },
-    { path: 'termOfService', component: _components_license_license_component__WEBPACK_IMPORTED_MODULE_8__["LicenseComponent"] }
+    { path: 'termOfService', component: _components_license_license_component__WEBPACK_IMPORTED_MODULE_8__["LicenseComponent"] },
+    { path: 'mapsDemo', component: _components_housing_housing_component__WEBPACK_IMPORTED_MODULE_9__["HousingComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -169,13 +861,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/contact/contact.component */ "./src/app/components/contact/contact.component.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/flex-layout */ "./node_modules/@angular/flex-layout/esm5/flex-layout.es5.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var google_maps_module__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! google-maps-module */ "./dist/google-maps-module/fesm5/google-maps-module.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _components_housing_housing_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/housing/housing.component */ "./src/app/components/housing/housing.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -214,7 +910,8 @@ var AppModule = /** @class */ (function () {
                 _components_home_home_component__WEBPACK_IMPORTED_MODULE_13__["HomeComponent"],
                 _components_resume_resume_component__WEBPACK_IMPORTED_MODULE_14__["ResumeComponent"],
                 _components_license_license_component__WEBPACK_IMPORTED_MODULE_15__["LicenseComponent"],
-                _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_16__["ContactComponent"]
+                _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_16__["ContactComponent"],
+                _components_housing_housing_component__WEBPACK_IMPORTED_MODULE_21__["HousingComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -222,13 +919,16 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__["BrowserAnimationsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatIconModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatMenuModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatButtonModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatSidenavModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatToolbarModule"],
-                _angular_flex_layout__WEBPACK_IMPORTED_MODULE_18__["FlexLayoutModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_20__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_20__["MatMenuModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_20__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_20__["MatSidenavModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_20__["MatListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_20__["MatToolbarModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_20__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_20__["MatInputModule"],
+                _angular_flex_layout__WEBPACK_IMPORTED_MODULE_18__["FlexLayoutModule"],
+                google_maps_module__WEBPACK_IMPORTED_MODULE_19__["GoogleMapsModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
@@ -379,7 +1079,7 @@ var CarouselComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<main class=\"Index\" data-controller=\"IndexFirstSectionHeight, Parallax, IndexNavigation\">\n  <section id=\"resume-header\" class=\"Index-page Index-page--has-image\" data-parallax-original-element data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content  vba-alternate-block-style-container\">\n      <h1 align=\"center\">CONTACT US!</h1>\n    </div>\n  </section>\n  <section id=\"contact-content\" class=\"Index-page\" data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content \">\n      <div class=\"row vba-row\">\n        <div class=\"col vba-col-12 span-12\">\n          <div class=\"vba-block html-block vba-block-html\" data-block-type=\"2\">\n            <div class=\"vba-block-content\" align=\"center\">\n              <h3 *ngIf=\"showSuccessMessage\">Thanks for your message!</h3>\n              <!-- form goes here -->\n              <form (ngSubmit)=\"processForm()\">\n                <!-- name -->\n                <div class=\"field\">\n                  <input type=\"text\" name=\"name\" class=\"input\" placeholder=\"Your Name\" [(ngModel)]=\"name\" required minlength=\"3\" #nameInput=\"ngModel\">\n                  <div class=\"help is-error\" *ngIf=\"nameInput.invalid && nameInput.dirty\">\n                    Name is required and needs to be at least 3 characters long.\n                  </div>\n                </div>\n                <!-- email -->\n                <div class=\"field\">\n                  <input type=\"email\" name=\"email\" class=\"input\" placeholder=\"Your Email\" [(ngModel)]=\"email\" required email #emailInput=\"ngModel\">\n                  <div class=\"help is-error\" *ngIf=\"emailInput.invalid && emailInput.dirty\">\n                    Needs to be a valid email.\n                  </div>\n                </div>\n                <!-- message -->\n                <div class=\"field\">\n                  <textarea class=\"textarea\" name=\"message\" placeholder=\"What's on your mind?\" [(ngModel)]=\"message\" required #messageInput=\"ngModel\"></textarea>\n                  <div class=\"help is-error\" *ngIf=\"emailInput.invalid && emailInput.dirty\">\n                    Your message is required!\n                  </div>\n                </div>\n                <button type=\"submit\" class=\"button is-danger is-large\">Submit</button>\n              </form>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n</main>\n"
+module.exports = "<main class=\"Index\" data-controller=\"IndexFirstSectionHeight, Parallax, IndexNavigation\">\n  <section id=\"resume-header\" class=\"Index-page Index-page--has-image\" data-parallax-original-element data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content  vba-alternate-block-style-container\">\n      <h1 align=\"center\">CONTACT US!</h1>\n    </div>\n  </section>\n  <section id=\"contact-content\" class=\"Index-page\" data-edit-main-image=\"Background\">\n    <div class=\"Index-page-content \">\n      <div class=\"row vba-row\">\n        <div class=\"col vba-col-12 span-12\">\n          <div class=\"vba-block html-block vba-block-html\" data-block-type=\"2\">\n            <div class=\"vba-block-content\" align=\"center\">\n              <h3 *ngIf=\"showSuccessMessage\">Thanks for your message!</h3>\n              <!-- form goes here -->\n              <form class=\"contact-form\" (ngSubmit)=\"processForm()\">\n                <!-- name -->\n                <div class=\"field\">\n                  <mat-form-field class=\"mat-headline\">\n                    <input matInput type=\"text\" name=\"name\" class=\"input\" placeholder=\"Your Name\" [(ngModel)]=\"name\" required minlength=\"3\" #nameInput=\"ngModel\">\n                  </mat-form-field>\n                  <div class=\"help is-error\" *ngIf=\"nameInput.invalid && nameInput.dirty\">\n                    Name is required and needs to be at least 3 characters long.\n                  </div>\n                </div>\n                <!-- email -->\n                <div class=\"field\">\n                  <mat-form-field class=\"mat-headline\">\n                    <input matInput type=\"email\" name=\"email\" class=\"input\" placeholder=\"Your Email\" [(ngModel)]=\"email\" required email #emailInput=\"ngModel\">\n                  </mat-form-field>\n                  <div class=\"help is-error\" *ngIf=\"emailInput.invalid && emailInput.dirty\">\n                    Needs to be a valid email.\n                  </div>\n                </div>\n                <!-- message -->\n                <div class=\"field\">\n                  <mat-form-field class=\"mat-headline\">\n                    <textarea matInput class=\"textarea\" name=\"message\" placeholder=\"What's on your mind?\" [(ngModel)]=\"message\" required #messageInput=\"ngModel\"></textarea>\n                  </mat-form-field>\n                  <div class=\"help is-error\" *ngIf=\"emailInput.invalid && emailInput.dirty\">\n                    Your message is required!\n                  </div>\n                </div>\n                <button mat-raised-button type=\"submit\" class=\"button is-danger is-large\">Submit</button>\n              </form>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n</main>\n"
 
 /***/ }),
 
@@ -390,7 +1090,7 @@ module.exports = "<main class=\"Index\" data-controller=\"IndexFirstSectionHeigh
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvY29udGFjdC9jb250YWN0LmNvbXBvbmVudC5sZXNzIn0= */"
+module.exports = ".mat-headline {\n  font-family: 'Playfair Display', sans-serif;\n  font-size: 14px;\n}\n.help.is-error {\n  color: red;\n  font-weight: bold;\n}\n.button {\n  font-family: 'Playfair Display', sans-serif;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3dhbGxhY2UvRGV2L1dvcmtzcGFjZS9wcmVzZW50YXRpb25XZWJTaXRlL3NyYy9hcHAvY29tcG9uZW50cy9jb250YWN0L2NvbnRhY3QuY29tcG9uZW50Lmxlc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvY29udGFjdC9jb250YWN0LmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsNENBQUE7RUFDQSxnQkFBQTtDQ0NEO0FERUQ7RUFDRSxXQUFBO0VBQ0Esa0JBQUE7Q0NBRDtBREdEO0VBQ0UsNENBQUE7Q0NERCIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvY29udGFjdC9jb250YWN0LmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLm1hdC1oZWFkbGluZXtcbiAgZm9udC1mYW1pbHk6ICdQbGF5ZmFpciBEaXNwbGF5Jywgc2Fucy1zZXJpZjtcbiAgZm9udC1zaXplOiAxNHB4O1xufVxuXG4uaGVscC5pcy1lcnJvcntcbiAgY29sb3I6cmVkO1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cblxuLmJ1dHRvbntcbiAgZm9udC1mYW1pbHk6ICdQbGF5ZmFpciBEaXNwbGF5Jywgc2Fucy1zZXJpZjtcbn1cbiIsIi5tYXQtaGVhZGxpbmUge1xuICBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXknLCBzYW5zLXNlcmlmO1xuICBmb250LXNpemU6IDE0cHg7XG59XG4uaGVscC5pcy1lcnJvciB7XG4gIGNvbG9yOiByZWQ7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuLmJ1dHRvbiB7XG4gIGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNhbnMtc2VyaWY7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -854,6 +1554,72 @@ var HomeComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/housing/housing.component.html":
+/*!***********************************************************!*\
+  !*** ./src/app/components/housing/housing.component.html ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<main class=\"Index\" data-controller=\"IndexFirstSectionHeight, Parallax, IndexNavigation\">\n   <section id=\"resume-header\" class=\"Index-page Index-page--has-image\"  data-parallax-original-element data-edit-main-image=\"Background\">\n      <div class=\"Index-page-content  vba-alternate-block-style-container\">\n         <div class=\"vba-layout vba-grid-12 columns-12\" data-type=\"page\">\n            <div class=\"row vba-row\">\n               <div class=\"col vba-col-12 span-12\">\n                  <div class=\"vba-block html-block vba-block-html\" data-block-type=\"2\">\n                     <div class=\"vba-block-content\">\n                        <h1>Google Maps</h1>\n                     </div>\n                  </div>\n               </div>\n            </div>\n         </div>\n      </div>\n   </section>\n   <section id=\"home-content\" class=\"Index-page\" data-edit-main-image=\"Background\">\n      <div class=\"Index-page-content \">\n        <div class=\"row vba-row\">\n           <div class=\"col vba-col-12 span-12\">\n              <div class=\"vba-block html-block vba-block-html\" data-block-type=\"2\">\n                 <div class=\"vba-block-content\">\n                   <google-maps\n                     [latitude]=\"lat\"\n                     [longitude]=\"lng\"\n                   >\n                   </google-maps>\n                 </div>\n              </div>\n           </div>\n        </div>\n      </div>\n   </section>\n</main>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/housing/housing.component.less":
+/*!***********************************************************!*\
+  !*** ./src/app/components/housing/housing.component.less ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaG91c2luZy9ob3VzaW5nLmNvbXBvbmVudC5sZXNzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/components/housing/housing.component.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/components/housing/housing.component.ts ***!
+  \*********************************************************/
+/*! exports provided: HousingComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HousingComponent", function() { return HousingComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var HousingComponent = /** @class */ (function () {
+    function HousingComponent() {
+        this.lat = 46.5618296;
+        this.lng = -72.74353;
+        this.height = '100%';
+    }
+    HousingComponent.prototype.ngOnInit = function () {
+    };
+    HousingComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-housing',
+            template: __webpack_require__(/*! ./housing.component.html */ "./src/app/components/housing/housing.component.html"),
+            styles: [__webpack_require__(/*! ./housing.component.less */ "./src/app/components/housing/housing.component.less")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], HousingComponent);
+    return HousingComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/license/license.component.html":
 /*!***********************************************************!*\
   !*** ./src/app/components/license/license.component.html ***!
@@ -1179,23 +1945,23 @@ function createMail(mail) {
             mailToSend.from = mail.from;
         }
         else {
-            throw 'the email provide is not valid';
+            throw 'Error Validaton: the email provide is not valid!';
         }
-        if (mail.name.length < 3) {
+        if (mail.name.length > 3) {
             mailToSend.subject = _model_mail_mail_config__WEBPACK_IMPORTED_MODULE_0__["MailConfig"].subject + ' ' + mail.name;
         }
         else {
-            throw 'Name is required and needs to be at least 3 characters long.';
+            throw 'Error Validaton: Name is required and needs to be at least 3 characters long!';
         }
         if (mail.text.length < 150) {
             mailToSend.text = mail.text;
         }
         else {
-            throw 'The mail text is to long';
+            throw 'Error Validaton: The mail text is to long!';
         }
     }
     catch (e) {
-        console.log(e);
+        console.error(e);
     }
     return mailToSend;
 }
